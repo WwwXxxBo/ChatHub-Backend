@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int     @id @default(autoincrement())
+  phone     String  @unique
+  email     String  @unique
+  name      String  @unique
+  password  String
+}
+
+model Assistant {
+  id              Int    @id @default(autoincrement())
+  assistantId     String @unique
+  userId          Int
+  type            String
+  name            String
+  provider        String
+  model           String
+  createTime      BigInt
+  lastUpdateTime  BigInt
+  instruction     String
+  inputMaxTokens  Int
+  maxTokens       Int
+  contextSize     Int
+  status          Int
+}
+
+model Message {
+  id            Int    @id @default(autoincrement())
+  messageId     String @unique
+  assistantId   String
+  name          String
+  role          String
+  type          String
+  content       String
+  image         String
+  createTime    BigInt
+  status        Int
+}
+
+model Setting {
+  id            Int    @id @default(autoincrement())
+  userId        Int
+  provider      String
+  apiKey        String
+  apiSecret     String
+  textType      String
+  language      String
+  theme         String
+}
