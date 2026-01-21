@@ -158,4 +158,144 @@ router.delete('/:assistantId', async (req, res, next) => {
   }
 })
 
+/**
+ * 获取助手详情
+ * GET /assistants/:assistantId
+ */
+router.get('/:assistantId', async (req, res, next) => {
+  try {
+    const { assistantId } = req.params
+    // 验证必要参数
+    if (!assistantId) {
+      return res.status(400).json({
+        success: false,
+        message: '助手ID不能为空',
+        data: null,
+      })
+    }
+    // 获取助手详情
+    const data = await assistantService.getAssistantByAssistantId(assistantId.trim())
+    success(res, '获取助手详情成功', data)
+  } catch (error) {
+    if (error.message === '助手不存在') {
+      return res.status(404).json({
+        success: false,
+        message: error.message,
+        data: null,
+      })
+    }
+    next(error)
+  }
+})
+
+/**
+ * 修改助手信息
+ * PUT /assistants/:assistantId
+ */
+router.put('/:assistantId', async (req, res, next) => {
+  try {
+    const { assistantId } = req.params
+    const updateData = req.body
+    // 验证必要参数
+    if (!assistantId) {
+      return res.status(400).json({
+        success: false,
+        message: '助手ID不能为空',
+        data: null,
+      })
+    }
+    if (!updateData || Object.keys(updateData).length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: '更新数据不能为空',
+        data: null,
+      })
+    }
+    // 执行修改
+    const data = await assistantService.updateAssistantByAssistantId(assistantId.trim(), updateData)
+    success(res, data.message || '修改助手成功', data)
+  } catch (error) {
+    // 处理特定错误
+    if (error.message === '助手不存在或已被删除') {
+      return res.status(404).json({
+        success: false,
+        message: error.message,
+        data: null,
+      })
+    }
+    if (error.message === '没有有效的更新字段') {
+      return res.status(400).json({
+        success: false,
+        message: error.message,
+        data: null,
+      })
+    }
+    // 处理唯一约束错误
+    if (error.code === 'P2002') {
+      const target = error.meta?.target
+      let message = '修改失败，数据冲突'
+      if (target && target.includes('name')) {
+        message = '助手名称已存在，请使用其他名称'
+      }
+      return res.status(400).json({
+        success: false,
+        message,
+        data: null,
+      })
+    }
+    next(error)
+  }
+})
+
+/**
+ * 批量获取助手信息
+ * POST /assistants/batch
+ */
+router.post('/batch', async (req, res, next) => {
+  try {
+    const { assistantIds } = req.body
+
+    // 验证必要参数
+    if (!assistantIds) {
+      return res.status(400).json({
+        success: false,
+        message: 'assistantIds不能为空',
+        data: null,
+      })
+    }
+
+    // 验证assistantIds格式
+    if (!Array.isArray(assistantIds) || assistantIds.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'assistantIds必须是非空数组',
+        data: null,
+      })
+    }
+
+    // 验证数组中的每个元素
+    const invalidAssistantIds = assistantIds.filter(
+      (id) => typeof id !== 'string' || id.trim().length === 0,
+    )
+
+    if (invalidAssistantIds.length > 0) {
+      return res.status(400).json({
+        success: false,
+        message: `存在无效的assistantId: ${invalidAssistantIds.join(', ')}`,
+        data: null,
+      })
+    }
+
+    // 去除空格
+    const trimmedAssistantIds = assistantIds.map((id) => id.trim())
+
+    // 批量获取助手信息
+    const assistants = await assistantService.getAssistantsByIds(trimmedAssistantIds)
+
+    success(res, '批量获取助手成功', { assistants })
+  } catch (error) {
+    next(error)
+  }
+})
+
 export default router
