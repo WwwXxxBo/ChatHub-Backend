@@ -28,8 +28,22 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
 app.use(logger('dev'))
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+
+// 🔴 关键修改：只保留一个请求体解析中间件
+// 方案 A：使用 express 内置的（如果 Express 版本 >= 4.16）
+app.use(express.json({ limit: '50mb' }))
+app.use(
+  express.urlencoded({
+    limit: '50mb',
+    extended: true, // 注意：这里要改为 true
+    parameterLimit: 50000,
+  }),
+)
+
+// 或者方案 B：使用 body-parser（删除上面的 express.json/urlencoded）
+// app.use(bodyParser.json({ limit: '50mb' }))
+// app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
+
 app.use(cookieParser())
 app.use(
   cors({
