@@ -37,6 +37,7 @@ model Message {
   id            Int     @id @default(autoincrement())
   messageId     String  @unique
   assistantId   String
+  noteId        String
   name          String
   role          String
   type          String
@@ -55,4 +56,21 @@ model Setting {
   textType      String
   language      String
   theme         String
+}
+
+model Note {
+  id              Int     @id @default(autoincrement())
+  noteId          String  @unique
+  userId          Int
+  type            String
+  name            String
+  provider        String
+  model           String
+  createTime      BigInt
+  lastUpdateTime  BigInt
+  instruction     String
+  inputMaxTokens  Int
+  maxTokens       Int
+  contextSize     Int
+  status          Int
 }

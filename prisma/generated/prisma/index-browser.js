@@ -146,6 +146,7 @@ exports.Prisma.MessageScalarFieldEnum = {
   id: 'id',
   messageId: 'messageId',
   assistantId: 'assistantId',
+  noteId: 'noteId',
   name: 'name',
   role: 'role',
   type: 'type',
@@ -166,6 +167,23 @@ exports.Prisma.SettingScalarFieldEnum = {
   theme: 'theme'
 };
 
+exports.Prisma.NoteScalarFieldEnum = {
+  id: 'id',
+  noteId: 'noteId',
+  userId: 'userId',
+  type: 'type',
+  name: 'name',
+  provider: 'provider',
+  model: 'model',
+  createTime: 'createTime',
+  lastUpdateTime: 'lastUpdateTime',
+  instruction: 'instruction',
+  inputMaxTokens: 'inputMaxTokens',
+  maxTokens: 'maxTokens',
+  contextSize: 'contextSize',
+  status: 'status'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -176,7 +194,8 @@ exports.Prisma.ModelName = {
   User: 'User',
   Assistant: 'Assistant',
   Message: 'Message',
-  Setting: 'Setting'
+  Setting: 'Setting',
+  Note: 'Note'
 };
 
 /**
