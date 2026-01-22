@@ -37,7 +37,6 @@ model Message {
   id          Int    @id @default(autoincrement())
   messageId   String @unique
   assistantId String
-  noteId      String
   name        String
   role        String
   type        String
@@ -73,4 +72,17 @@ model Note {
   maxTokens      Int
   contextSize    Int
   status         Int
+}
+
+model NoteMessage {
+  id         Int    @id @default(autoincrement())
+  messageId  String @unique
+  noteId     String
+  name       String
+  role       String
+  type       String
+  content    String
+  image      String
+  createTime BigInt
+  status     Int
 }
