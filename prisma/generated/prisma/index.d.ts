@@ -5710,9 +5710,6 @@ export namespace Prisma {
     userId: number | null
     createTime: number | null
     lastUpdateTime: number | null
-    inputMaxTokens: number | null
-    maxTokens: number | null
-    contextSize: number | null
     status: number | null
   }
 
@@ -5721,60 +5718,48 @@ export namespace Prisma {
     userId: number | null
     createTime: bigint | null
     lastUpdateTime: bigint | null
-    inputMaxTokens: number | null
-    maxTokens: number | null
-    contextSize: number | null
     status: number | null
   }
 
   export type NoteMinAggregateOutputType = {
     id: number | null
     noteId: string | null
+    assistantId: string | null
     userId: number | null
     type: string | null
     name: string | null
-    provider: string | null
-    model: string | null
+    content: string | null
+    comment: string | null
     createTime: bigint | null
     lastUpdateTime: bigint | null
-    instruction: string | null
-    inputMaxTokens: number | null
-    maxTokens: number | null
-    contextSize: number | null
     status: number | null
   }
 
   export type NoteMaxAggregateOutputType = {
     id: number | null
     noteId: string | null
+    assistantId: string | null
     userId: number | null
     type: string | null
     name: string | null
-    provider: string | null
-    model: string | null
+    content: string | null
+    comment: string | null
     createTime: bigint | null
     lastUpdateTime: bigint | null
-    instruction: string | null
-    inputMaxTokens: number | null
-    maxTokens: number | null
-    contextSize: number | null
     status: number | null
   }
 
   export type NoteCountAggregateOutputType = {
     id: number
     noteId: number
+    assistantId: number
     userId: number
     type: number
     name: number
-    provider: number
-    model: number
+    content: number
+    comment: number
     createTime: number
     lastUpdateTime: number
-    instruction: number
-    inputMaxTokens: number
-    maxTokens: number
-    contextSize: number
     status: number
     _all: number
   }
@@ -5785,9 +5770,6 @@ export namespace Prisma {
     userId?: true
     createTime?: true
     lastUpdateTime?: true
-    inputMaxTokens?: true
-    maxTokens?: true
-    contextSize?: true
     status?: true
   }
 
@@ -5796,60 +5778,48 @@ export namespace Prisma {
     userId?: true
     createTime?: true
     lastUpdateTime?: true
-    inputMaxTokens?: true
-    maxTokens?: true
-    contextSize?: true
     status?: true
   }
 
   export type NoteMinAggregateInputType = {
     id?: true
     noteId?: true
+    assistantId?: true
     userId?: true
     type?: true
     name?: true
-    provider?: true
-    model?: true
+    content?: true
+    comment?: true
     createTime?: true
     lastUpdateTime?: true
-    instruction?: true
-    inputMaxTokens?: true
-    maxTokens?: true
-    contextSize?: true
     status?: true
   }
 
   export type NoteMaxAggregateInputType = {
     id?: true
     noteId?: true
+    assistantId?: true
     userId?: true
     type?: true
     name?: true
-    provider?: true
-    model?: true
+    content?: true
+    comment?: true
     createTime?: true
     lastUpdateTime?: true
-    instruction?: true
-    inputMaxTokens?: true
-    maxTokens?: true
-    contextSize?: true
     status?: true
   }
 
   export type NoteCountAggregateInputType = {
     id?: true
     noteId?: true
+    assistantId?: true
     userId?: true
     type?: true
     name?: true
-    provider?: true
-    model?: true
+    content?: true
+    comment?: true
     createTime?: true
     lastUpdateTime?: true
-    instruction?: true
-    inputMaxTokens?: true
-    maxTokens?: true
-    contextSize?: true
     status?: true
     _all?: true
   }
@@ -5943,17 +5913,14 @@ export namespace Prisma {
   export type NoteGroupByOutputType = {
     id: number
     noteId: string
+    assistantId: string
     userId: number
     type: string
     name: string
-    provider: string
-    model: string
+    content: string
+    comment: string
     createTime: bigint
     lastUpdateTime: bigint
-    instruction: string
-    inputMaxTokens: number
-    maxTokens: number
-    contextSize: number
     status: number
     _count: NoteCountAggregateOutputType | null
     _avg: NoteAvgAggregateOutputType | null
@@ -5979,72 +5946,60 @@ export namespace Prisma {
   export type NoteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     noteId?: boolean
+    assistantId?: boolean
     userId?: boolean
     type?: boolean
     name?: boolean
-    provider?: boolean
-    model?: boolean
+    content?: boolean
+    comment?: boolean
     createTime?: boolean
     lastUpdateTime?: boolean
-    instruction?: boolean
-    inputMaxTokens?: boolean
-    maxTokens?: boolean
-    contextSize?: boolean
     status?: boolean
   }, ExtArgs["result"]["note"]>
 
   export type NoteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     noteId?: boolean
+    assistantId?: boolean
     userId?: boolean
     type?: boolean
     name?: boolean
-    provider?: boolean
-    model?: boolean
+    content?: boolean
+    comment?: boolean
     createTime?: boolean
     lastUpdateTime?: boolean
-    instruction?: boolean
-    inputMaxTokens?: boolean
-    maxTokens?: boolean
-    contextSize?: boolean
     status?: boolean
   }, ExtArgs["result"]["note"]>
 
   export type NoteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     noteId?: boolean
+    assistantId?: boolean
     userId?: boolean
     type?: boolean
     name?: boolean
-    provider?: boolean
-    model?: boolean
+    content?: boolean
+    comment?: boolean
     createTime?: boolean
     lastUpdateTime?: boolean
-    instruction?: boolean
-    inputMaxTokens?: boolean
-    maxTokens?: boolean
-    contextSize?: boolean
     status?: boolean
   }, ExtArgs["result"]["note"]>
 
   export type NoteSelectScalar = {
     id?: boolean
     noteId?: boolean
+    assistantId?: boolean
     userId?: boolean
     type?: boolean
     name?: boolean
-    provider?: boolean
-    model?: boolean
+    content?: boolean
+    comment?: boolean
     createTime?: boolean
     lastUpdateTime?: boolean
-    instruction?: boolean
-    inputMaxTokens?: boolean
-    maxTokens?: boolean
-    contextSize?: boolean
     status?: boolean
   }
 
-  export type NoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "noteId" | "userId" | "type" | "name" | "provider" | "model" | "createTime" | "lastUpdateTime" | "instruction" | "inputMaxTokens" | "maxTokens" | "contextSize" | "status", ExtArgs["result"]["note"]>
+  export type NoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "noteId" | "assistantId" | "userId" | "type" | "name" | "content" | "comment" | "createTime" | "lastUpdateTime" | "status", ExtArgs["result"]["note"]>
 
   export type $NotePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Note"
@@ -6052,17 +6007,14 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       noteId: string
+      assistantId: string
       userId: number
       type: string
       name: string
-      provider: string
-      model: string
+      content: string
+      comment: string
       createTime: bigint
       lastUpdateTime: bigint
-      instruction: string
-      inputMaxTokens: number
-      maxTokens: number
-      contextSize: number
       status: number
     }, ExtArgs["result"]["note"]>
     composites: {}
@@ -6489,17 +6441,14 @@ export namespace Prisma {
   interface NoteFieldRefs {
     readonly id: FieldRef<"Note", 'Int'>
     readonly noteId: FieldRef<"Note", 'String'>
+    readonly assistantId: FieldRef<"Note", 'String'>
     readonly userId: FieldRef<"Note", 'Int'>
     readonly type: FieldRef<"Note", 'String'>
     readonly name: FieldRef<"Note", 'String'>
-    readonly provider: FieldRef<"Note", 'String'>
-    readonly model: FieldRef<"Note", 'String'>
+    readonly content: FieldRef<"Note", 'String'>
+    readonly comment: FieldRef<"Note", 'String'>
     readonly createTime: FieldRef<"Note", 'BigInt'>
     readonly lastUpdateTime: FieldRef<"Note", 'BigInt'>
-    readonly instruction: FieldRef<"Note", 'String'>
-    readonly inputMaxTokens: FieldRef<"Note", 'Int'>
-    readonly maxTokens: FieldRef<"Note", 'Int'>
-    readonly contextSize: FieldRef<"Note", 'Int'>
     readonly status: FieldRef<"Note", 'Int'>
   }
     
@@ -8040,17 +7989,14 @@ export namespace Prisma {
   export const NoteScalarFieldEnum: {
     id: 'id',
     noteId: 'noteId',
+    assistantId: 'assistantId',
     userId: 'userId',
     type: 'type',
     name: 'name',
-    provider: 'provider',
-    model: 'model',
+    content: 'content',
+    comment: 'comment',
     createTime: 'createTime',
     lastUpdateTime: 'lastUpdateTime',
-    instruction: 'instruction',
-    inputMaxTokens: 'inputMaxTokens',
-    maxTokens: 'maxTokens',
-    contextSize: 'contextSize',
     status: 'status'
   };
 
@@ -8424,34 +8370,28 @@ export namespace Prisma {
     NOT?: NoteWhereInput | NoteWhereInput[]
     id?: IntFilter<"Note"> | number
     noteId?: StringFilter<"Note"> | string
+    assistantId?: StringFilter<"Note"> | string
     userId?: IntFilter<"Note"> | number
     type?: StringFilter<"Note"> | string
     name?: StringFilter<"Note"> | string
-    provider?: StringFilter<"Note"> | string
-    model?: StringFilter<"Note"> | string
+    content?: StringFilter<"Note"> | string
+    comment?: StringFilter<"Note"> | string
     createTime?: BigIntFilter<"Note"> | bigint | number
     lastUpdateTime?: BigIntFilter<"Note"> | bigint | number
-    instruction?: StringFilter<"Note"> | string
-    inputMaxTokens?: IntFilter<"Note"> | number
-    maxTokens?: IntFilter<"Note"> | number
-    contextSize?: IntFilter<"Note"> | number
     status?: IntFilter<"Note"> | number
   }
 
   export type NoteOrderByWithRelationInput = {
     id?: SortOrder
     noteId?: SortOrder
+    assistantId?: SortOrder
     userId?: SortOrder
     type?: SortOrder
     name?: SortOrder
-    provider?: SortOrder
-    model?: SortOrder
+    content?: SortOrder
+    comment?: SortOrder
     createTime?: SortOrder
     lastUpdateTime?: SortOrder
-    instruction?: SortOrder
-    inputMaxTokens?: SortOrder
-    maxTokens?: SortOrder
-    contextSize?: SortOrder
     status?: SortOrder
   }
 
@@ -8461,34 +8401,28 @@ export namespace Prisma {
     AND?: NoteWhereInput | NoteWhereInput[]
     OR?: NoteWhereInput[]
     NOT?: NoteWhereInput | NoteWhereInput[]
+    assistantId?: StringFilter<"Note"> | string
     userId?: IntFilter<"Note"> | number
     type?: StringFilter<"Note"> | string
     name?: StringFilter<"Note"> | string
-    provider?: StringFilter<"Note"> | string
-    model?: StringFilter<"Note"> | string
+    content?: StringFilter<"Note"> | string
+    comment?: StringFilter<"Note"> | string
     createTime?: BigIntFilter<"Note"> | bigint | number
     lastUpdateTime?: BigIntFilter<"Note"> | bigint | number
-    instruction?: StringFilter<"Note"> | string
-    inputMaxTokens?: IntFilter<"Note"> | number
-    maxTokens?: IntFilter<"Note"> | number
-    contextSize?: IntFilter<"Note"> | number
     status?: IntFilter<"Note"> | number
   }, "id" | "noteId">
 
   export type NoteOrderByWithAggregationInput = {
     id?: SortOrder
     noteId?: SortOrder
+    assistantId?: SortOrder
     userId?: SortOrder
     type?: SortOrder
     name?: SortOrder
-    provider?: SortOrder
-    model?: SortOrder
+    content?: SortOrder
+    comment?: SortOrder
     createTime?: SortOrder
     lastUpdateTime?: SortOrder
-    instruction?: SortOrder
-    inputMaxTokens?: SortOrder
-    maxTokens?: SortOrder
-    contextSize?: SortOrder
     status?: SortOrder
     _count?: NoteCountOrderByAggregateInput
     _avg?: NoteAvgOrderByAggregateInput
@@ -8503,17 +8437,14 @@ export namespace Prisma {
     NOT?: NoteScalarWhereWithAggregatesInput | NoteScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Note"> | number
     noteId?: StringWithAggregatesFilter<"Note"> | string
+    assistantId?: StringWithAggregatesFilter<"Note"> | string
     userId?: IntWithAggregatesFilter<"Note"> | number
     type?: StringWithAggregatesFilter<"Note"> | string
     name?: StringWithAggregatesFilter<"Note"> | string
-    provider?: StringWithAggregatesFilter<"Note"> | string
-    model?: StringWithAggregatesFilter<"Note"> | string
+    content?: StringWithAggregatesFilter<"Note"> | string
+    comment?: StringWithAggregatesFilter<"Note"> | string
     createTime?: BigIntWithAggregatesFilter<"Note"> | bigint | number
     lastUpdateTime?: BigIntWithAggregatesFilter<"Note"> | bigint | number
-    instruction?: StringWithAggregatesFilter<"Note"> | string
-    inputMaxTokens?: IntWithAggregatesFilter<"Note"> | number
-    maxTokens?: IntWithAggregatesFilter<"Note"> | number
-    contextSize?: IntWithAggregatesFilter<"Note"> | number
     status?: IntWithAggregatesFilter<"Note"> | number
   }
 
@@ -8548,10 +8479,10 @@ export namespace Prisma {
 
   export type NoteMessageWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    messageId?: string
     AND?: NoteMessageWhereInput | NoteMessageWhereInput[]
     OR?: NoteMessageWhereInput[]
     NOT?: NoteMessageWhereInput | NoteMessageWhereInput[]
+    messageId?: StringFilter<"NoteMessage"> | string
     noteId?: StringFilter<"NoteMessage"> | string
     name?: StringFilter<"NoteMessage"> | string
     role?: StringFilter<"NoteMessage"> | string
@@ -8560,7 +8491,7 @@ export namespace Prisma {
     image?: StringFilter<"NoteMessage"> | string
     createTime?: BigIntFilter<"NoteMessage"> | bigint | number
     status?: IntFilter<"NoteMessage"> | number
-  }, "id" | "messageId">
+  }, "id">
 
   export type NoteMessageOrderByWithAggregationInput = {
     id?: SortOrder
@@ -8929,117 +8860,96 @@ export namespace Prisma {
 
   export type NoteCreateInput = {
     noteId: string
+    assistantId: string
     userId: number
     type: string
     name: string
-    provider: string
-    model: string
+    content: string
+    comment: string
     createTime: bigint | number
     lastUpdateTime: bigint | number
-    instruction: string
-    inputMaxTokens: number
-    maxTokens: number
-    contextSize: number
     status: number
   }
 
   export type NoteUncheckedCreateInput = {
     id?: number
     noteId: string
+    assistantId: string
     userId: number
     type: string
     name: string
-    provider: string
-    model: string
+    content: string
+    comment: string
     createTime: bigint | number
     lastUpdateTime: bigint | number
-    instruction: string
-    inputMaxTokens: number
-    maxTokens: number
-    contextSize: number
     status: number
   }
 
   export type NoteUpdateInput = {
     noteId?: StringFieldUpdateOperationsInput | string
+    assistantId?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
     type?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    provider?: StringFieldUpdateOperationsInput | string
-    model?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    comment?: StringFieldUpdateOperationsInput | string
     createTime?: BigIntFieldUpdateOperationsInput | bigint | number
     lastUpdateTime?: BigIntFieldUpdateOperationsInput | bigint | number
-    instruction?: StringFieldUpdateOperationsInput | string
-    inputMaxTokens?: IntFieldUpdateOperationsInput | number
-    maxTokens?: IntFieldUpdateOperationsInput | number
-    contextSize?: IntFieldUpdateOperationsInput | number
     status?: IntFieldUpdateOperationsInput | number
   }
 
   export type NoteUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     noteId?: StringFieldUpdateOperationsInput | string
+    assistantId?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
     type?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    provider?: StringFieldUpdateOperationsInput | string
-    model?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    comment?: StringFieldUpdateOperationsInput | string
     createTime?: BigIntFieldUpdateOperationsInput | bigint | number
     lastUpdateTime?: BigIntFieldUpdateOperationsInput | bigint | number
-    instruction?: StringFieldUpdateOperationsInput | string
-    inputMaxTokens?: IntFieldUpdateOperationsInput | number
-    maxTokens?: IntFieldUpdateOperationsInput | number
-    contextSize?: IntFieldUpdateOperationsInput | number
     status?: IntFieldUpdateOperationsInput | number
   }
 
   export type NoteCreateManyInput = {
     id?: number
     noteId: string
+    assistantId: string
     userId: number
     type: string
     name: string
-    provider: string
-    model: string
+    content: string
+    comment: string
     createTime: bigint | number
     lastUpdateTime: bigint | number
-    instruction: string
-    inputMaxTokens: number
-    maxTokens: number
-    contextSize: number
     status: number
   }
 
   export type NoteUpdateManyMutationInput = {
     noteId?: StringFieldUpdateOperationsInput | string
+    assistantId?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
     type?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    provider?: StringFieldUpdateOperationsInput | string
-    model?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    comment?: StringFieldUpdateOperationsInput | string
     createTime?: BigIntFieldUpdateOperationsInput | bigint | number
     lastUpdateTime?: BigIntFieldUpdateOperationsInput | bigint | number
-    instruction?: StringFieldUpdateOperationsInput | string
-    inputMaxTokens?: IntFieldUpdateOperationsInput | number
-    maxTokens?: IntFieldUpdateOperationsInput | number
-    contextSize?: IntFieldUpdateOperationsInput | number
     status?: IntFieldUpdateOperationsInput | number
   }
 
   export type NoteUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     noteId?: StringFieldUpdateOperationsInput | string
+    assistantId?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
     type?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    provider?: StringFieldUpdateOperationsInput | string
-    model?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    comment?: StringFieldUpdateOperationsInput | string
     createTime?: BigIntFieldUpdateOperationsInput | bigint | number
     lastUpdateTime?: BigIntFieldUpdateOperationsInput | bigint | number
-    instruction?: StringFieldUpdateOperationsInput | string
-    inputMaxTokens?: IntFieldUpdateOperationsInput | number
-    maxTokens?: IntFieldUpdateOperationsInput | number
-    contextSize?: IntFieldUpdateOperationsInput | number
     status?: IntFieldUpdateOperationsInput | number
   }
 
@@ -9418,17 +9328,14 @@ export namespace Prisma {
   export type NoteCountOrderByAggregateInput = {
     id?: SortOrder
     noteId?: SortOrder
+    assistantId?: SortOrder
     userId?: SortOrder
     type?: SortOrder
     name?: SortOrder
-    provider?: SortOrder
-    model?: SortOrder
+    content?: SortOrder
+    comment?: SortOrder
     createTime?: SortOrder
     lastUpdateTime?: SortOrder
-    instruction?: SortOrder
-    inputMaxTokens?: SortOrder
-    maxTokens?: SortOrder
-    contextSize?: SortOrder
     status?: SortOrder
   }
 
@@ -9437,43 +9344,34 @@ export namespace Prisma {
     userId?: SortOrder
     createTime?: SortOrder
     lastUpdateTime?: SortOrder
-    inputMaxTokens?: SortOrder
-    maxTokens?: SortOrder
-    contextSize?: SortOrder
     status?: SortOrder
   }
 
   export type NoteMaxOrderByAggregateInput = {
     id?: SortOrder
     noteId?: SortOrder
+    assistantId?: SortOrder
     userId?: SortOrder
     type?: SortOrder
     name?: SortOrder
-    provider?: SortOrder
-    model?: SortOrder
+    content?: SortOrder
+    comment?: SortOrder
     createTime?: SortOrder
     lastUpdateTime?: SortOrder
-    instruction?: SortOrder
-    inputMaxTokens?: SortOrder
-    maxTokens?: SortOrder
-    contextSize?: SortOrder
     status?: SortOrder
   }
 
   export type NoteMinOrderByAggregateInput = {
     id?: SortOrder
     noteId?: SortOrder
+    assistantId?: SortOrder
     userId?: SortOrder
     type?: SortOrder
     name?: SortOrder
-    provider?: SortOrder
-    model?: SortOrder
+    content?: SortOrder
+    comment?: SortOrder
     createTime?: SortOrder
     lastUpdateTime?: SortOrder
-    instruction?: SortOrder
-    inputMaxTokens?: SortOrder
-    maxTokens?: SortOrder
-    contextSize?: SortOrder
     status?: SortOrder
   }
 
@@ -9482,9 +9380,6 @@ export namespace Prisma {
     userId?: SortOrder
     createTime?: SortOrder
     lastUpdateTime?: SortOrder
-    inputMaxTokens?: SortOrder
-    maxTokens?: SortOrder
-    contextSize?: SortOrder
     status?: SortOrder
   }
 

@@ -48,7 +48,7 @@ router.post('/', async (req, res, next) => {
     const noteData = req.body
 
     // 验证必要字段
-    const requiredFields = ['userId', 'noteId', 'name', 'type', 'provider', 'model']
+    const requiredFields = ['userId', 'noteId']
     for (const field of requiredFields) {
       if (!noteData[field]) {
         return res.status(400).json({
@@ -67,11 +67,7 @@ router.post('/', async (req, res, next) => {
 
     // 设置默认值
     const defaultValues = {
-      inputMaxTokens: 4096,
-      maxTokens: 4096,
-      contextSize: 4096,
       status: 1,
-      instruction: '',
       createTime: currentTimestamp,
       lastUpdateTime: currentTimestamp,
     }

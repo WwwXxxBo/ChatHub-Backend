@@ -60,23 +60,20 @@ model Setting {
 model Note {
   id             Int    @id @default(autoincrement())
   noteId         String @unique
+  assistantId    String
   userId         Int
   type           String
   name           String
-  provider       String
-  model          String
+  content        String
+  comment        String
   createTime     BigInt
   lastUpdateTime BigInt
-  instruction    String
-  inputMaxTokens Int
-  maxTokens      Int
-  contextSize    Int
   status         Int
 }
 
 model NoteMessage {
   id         Int    @id @default(autoincrement())
-  messageId  String @unique
+  messageId  String
   noteId     String
   name       String
   role       String

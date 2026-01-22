@@ -14,6 +14,6 @@ router.use('/users', userRouter)
 router.use('/assistants', assistantRouter)
 router.use('/messages', messageRouter)
 router.use('/notes', noteRouter)
-router.use('/noteMessages', noteMessageRouter)
+router.use('/note_messages', noteMessageRouter)
 
 export default router

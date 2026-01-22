@@ -169,17 +169,14 @@ exports.Prisma.SettingScalarFieldEnum = {
 exports.Prisma.NoteScalarFieldEnum = {
   id: 'id',
   noteId: 'noteId',
+  assistantId: 'assistantId',
   userId: 'userId',
   type: 'type',
   name: 'name',
-  provider: 'provider',
-  model: 'model',
+  content: 'content',
+  comment: 'comment',
   createTime: 'createTime',
   lastUpdateTime: 'lastUpdateTime',
-  instruction: 'instruction',
-  inputMaxTokens: 'inputMaxTokens',
-  maxTokens: 'maxTokens',
-  contextSize: 'contextSize',
   status: 'status'
 };
 

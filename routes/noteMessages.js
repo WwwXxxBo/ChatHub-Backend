@@ -8,12 +8,12 @@ const router = express.Router()
  * 根据 noteId 获取笔记消息列表
  * GET /notemessages?noteId=xxx
  */
-router.get('/', async (req, resizeBy, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const { noteId } = req.query
     // 验证必要参数
     if (!noteId) {
-      return resizeBy.status(400).json({
+      return res.status(400).json({
         success: false,
         message: '笔记ID不能为空',
         data: null,

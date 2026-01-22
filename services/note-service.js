@@ -86,7 +86,7 @@ class NoteService {
     }
 
     // 不允许修改的字段
-    const disallowedFields = ['id', 'noteId', 'userId', 'createTime', 'status']
+    const disallowedFields = ['id', 'noteId', 'assistantId', 'userId', 'createTime', 'status']
 
     // 过滤掉不允许修改的字段
     const filteredUpdateData = Object.keys(updateData)
