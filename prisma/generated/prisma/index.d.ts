@@ -5728,6 +5728,7 @@ export namespace Prisma {
     userId: number | null
     type: string | null
     name: string | null
+    title: string | null
     content: string | null
     comment: string | null
     createTime: bigint | null
@@ -5742,6 +5743,7 @@ export namespace Prisma {
     userId: number | null
     type: string | null
     name: string | null
+    title: string | null
     content: string | null
     comment: string | null
     createTime: bigint | null
@@ -5756,6 +5758,7 @@ export namespace Prisma {
     userId: number
     type: number
     name: number
+    title: number
     content: number
     comment: number
     createTime: number
@@ -5788,6 +5791,7 @@ export namespace Prisma {
     userId?: true
     type?: true
     name?: true
+    title?: true
     content?: true
     comment?: true
     createTime?: true
@@ -5802,6 +5806,7 @@ export namespace Prisma {
     userId?: true
     type?: true
     name?: true
+    title?: true
     content?: true
     comment?: true
     createTime?: true
@@ -5816,6 +5821,7 @@ export namespace Prisma {
     userId?: true
     type?: true
     name?: true
+    title?: true
     content?: true
     comment?: true
     createTime?: true
@@ -5917,6 +5923,7 @@ export namespace Prisma {
     userId: number
     type: string
     name: string
+    title: string
     content: string
     comment: string
     createTime: bigint
@@ -5950,6 +5957,7 @@ export namespace Prisma {
     userId?: boolean
     type?: boolean
     name?: boolean
+    title?: boolean
     content?: boolean
     comment?: boolean
     createTime?: boolean
@@ -5964,6 +5972,7 @@ export namespace Prisma {
     userId?: boolean
     type?: boolean
     name?: boolean
+    title?: boolean
     content?: boolean
     comment?: boolean
     createTime?: boolean
@@ -5978,6 +5987,7 @@ export namespace Prisma {
     userId?: boolean
     type?: boolean
     name?: boolean
+    title?: boolean
     content?: boolean
     comment?: boolean
     createTime?: boolean
@@ -5992,6 +6002,7 @@ export namespace Prisma {
     userId?: boolean
     type?: boolean
     name?: boolean
+    title?: boolean
     content?: boolean
     comment?: boolean
     createTime?: boolean
@@ -5999,7 +6010,7 @@ export namespace Prisma {
     status?: boolean
   }
 
-  export type NoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "noteId" | "assistantId" | "userId" | "type" | "name" | "content" | "comment" | "createTime" | "lastUpdateTime" | "status", ExtArgs["result"]["note"]>
+  export type NoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "noteId" | "assistantId" | "userId" | "type" | "name" | "title" | "content" | "comment" | "createTime" | "lastUpdateTime" | "status", ExtArgs["result"]["note"]>
 
   export type $NotePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Note"
@@ -6011,6 +6022,7 @@ export namespace Prisma {
       userId: number
       type: string
       name: string
+      title: string
       content: string
       comment: string
       createTime: bigint
@@ -6445,6 +6457,7 @@ export namespace Prisma {
     readonly userId: FieldRef<"Note", 'Int'>
     readonly type: FieldRef<"Note", 'String'>
     readonly name: FieldRef<"Note", 'String'>
+    readonly title: FieldRef<"Note", 'String'>
     readonly content: FieldRef<"Note", 'String'>
     readonly comment: FieldRef<"Note", 'String'>
     readonly createTime: FieldRef<"Note", 'BigInt'>
@@ -7993,6 +8006,7 @@ export namespace Prisma {
     userId: 'userId',
     type: 'type',
     name: 'name',
+    title: 'title',
     content: 'content',
     comment: 'comment',
     createTime: 'createTime',
@@ -8374,6 +8388,7 @@ export namespace Prisma {
     userId?: IntFilter<"Note"> | number
     type?: StringFilter<"Note"> | string
     name?: StringFilter<"Note"> | string
+    title?: StringFilter<"Note"> | string
     content?: StringFilter<"Note"> | string
     comment?: StringFilter<"Note"> | string
     createTime?: BigIntFilter<"Note"> | bigint | number
@@ -8388,6 +8403,7 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     name?: SortOrder
+    title?: SortOrder
     content?: SortOrder
     comment?: SortOrder
     createTime?: SortOrder
@@ -8405,6 +8421,7 @@ export namespace Prisma {
     userId?: IntFilter<"Note"> | number
     type?: StringFilter<"Note"> | string
     name?: StringFilter<"Note"> | string
+    title?: StringFilter<"Note"> | string
     content?: StringFilter<"Note"> | string
     comment?: StringFilter<"Note"> | string
     createTime?: BigIntFilter<"Note"> | bigint | number
@@ -8419,6 +8436,7 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     name?: SortOrder
+    title?: SortOrder
     content?: SortOrder
     comment?: SortOrder
     createTime?: SortOrder
@@ -8441,6 +8459,7 @@ export namespace Prisma {
     userId?: IntWithAggregatesFilter<"Note"> | number
     type?: StringWithAggregatesFilter<"Note"> | string
     name?: StringWithAggregatesFilter<"Note"> | string
+    title?: StringWithAggregatesFilter<"Note"> | string
     content?: StringWithAggregatesFilter<"Note"> | string
     comment?: StringWithAggregatesFilter<"Note"> | string
     createTime?: BigIntWithAggregatesFilter<"Note"> | bigint | number
@@ -8864,6 +8883,7 @@ export namespace Prisma {
     userId: number
     type: string
     name: string
+    title: string
     content: string
     comment: string
     createTime: bigint | number
@@ -8878,6 +8898,7 @@ export namespace Prisma {
     userId: number
     type: string
     name: string
+    title: string
     content: string
     comment: string
     createTime: bigint | number
@@ -8891,6 +8912,7 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     type?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     comment?: StringFieldUpdateOperationsInput | string
     createTime?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -8905,6 +8927,7 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     type?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     comment?: StringFieldUpdateOperationsInput | string
     createTime?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -8919,6 +8942,7 @@ export namespace Prisma {
     userId: number
     type: string
     name: string
+    title: string
     content: string
     comment: string
     createTime: bigint | number
@@ -8932,6 +8956,7 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     type?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     comment?: StringFieldUpdateOperationsInput | string
     createTime?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -8946,6 +8971,7 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     type?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     comment?: StringFieldUpdateOperationsInput | string
     createTime?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -9332,6 +9358,7 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     name?: SortOrder
+    title?: SortOrder
     content?: SortOrder
     comment?: SortOrder
     createTime?: SortOrder
@@ -9354,6 +9381,7 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     name?: SortOrder
+    title?: SortOrder
     content?: SortOrder
     comment?: SortOrder
     createTime?: SortOrder
@@ -9368,6 +9396,7 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     name?: SortOrder
+    title?: SortOrder
     content?: SortOrder
     comment?: SortOrder
     createTime?: SortOrder

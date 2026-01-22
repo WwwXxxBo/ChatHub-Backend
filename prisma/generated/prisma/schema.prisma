@@ -64,6 +64,7 @@ model Note {
   userId         Int
   type           String
   name           String
+  title          String
   content        String
   comment        String
   createTime     BigInt
