@@ -57,6 +57,15 @@ model Setting {
   theme         String
 }
 
+model Provider {
+  id            Int     @id   @default(autoincrement())
+  providerId          String  @unique
+  userId        Int
+  provider      String
+  apiKey        String
+  apiSecret     String
+}
+
 model Note {
   id              Int     @id @default(autoincrement())
   noteId          String  @unique

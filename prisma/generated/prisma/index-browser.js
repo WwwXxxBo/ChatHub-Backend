@@ -166,6 +166,15 @@ exports.Prisma.SettingScalarFieldEnum = {
   theme: 'theme'
 };
 
+exports.Prisma.ProviderScalarFieldEnum = {
+  id: 'id',
+  providerId: 'providerId',
+  userId: 'userId',
+  provider: 'provider',
+  apiKey: 'apiKey',
+  apiSecret: 'apiSecret'
+};
+
 exports.Prisma.NoteScalarFieldEnum = {
   id: 'id',
   noteId: 'noteId',
@@ -205,6 +214,7 @@ exports.Prisma.ModelName = {
   Assistant: 'Assistant',
   Message: 'Message',
   Setting: 'Setting',
+  Provider: 'Provider',
   Note: 'Note',
   NoteMessage: 'NoteMessage'
 };
