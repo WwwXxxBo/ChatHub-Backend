@@ -51,19 +51,54 @@ class NoteService {
     if (existingNote.status === 0) {
       throw new Error('笔记已被删除')
     }
-    const updatedNote = await prisma.note.update({
-      where: {
-        id: existingNote.id,
-      },
-      data: {
-        status: 0,
-        lastUpdateTime: Date.now(),
-      },
+
+    let deletedMessageCount = 0
+
+    // 使用事务来确保数据一致性
+    const result = await prisma.$transaction(async (prisma) => {
+      // 1. 软删除笔记
+      const updatedNote = await prisma.note.update({
+        where: {
+          id: existingNote.id,
+        },
+        data: {
+          status: 0,
+          lastUpdateTime: Date.now(),
+        },
+      })
+
+      // 2. 查询关联的笔记消息数量
+      const noteMessages = await prisma.noteMessage.findMany({
+        where: {
+          noteId: noteId,
+          status: 1,
+        },
+        select: {
+          id: true,
+        },
+      })
+
+      deletedMessageCount = noteMessages.length
+
+      // 3. 软删除关联的所有NoteMessage
+      if (deletedMessageCount > 0) {
+        await prisma.noteMessage.updateMany({
+          where: {
+            noteId: noteId,
+            status: 1,
+          },
+          data: {
+            status: 0,
+          },
+        })
+      }
+
+      return { updatedNote, deletedMessageCount }
     })
 
     return {
-      note: updatedNote,
-      message: '删除成功',
+      note: result.updatedNote,
+      message: `删除成功，同时删除了 ${result.deletedMessageCount} 条关联的笔记消息`,
     }
   }
 
