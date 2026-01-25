@@ -125,6 +125,16 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password'
 };
 
+exports.Prisma.SettingScalarFieldEnum = {
+  id: 'id',
+  settingId: 'settingId',
+  userId: 'userId',
+  theme: 'theme',
+  customTheme: 'customTheme',
+  fontSize: 'fontSize',
+  locale: 'locale'
+};
+
 exports.Prisma.AssistantScalarFieldEnum = {
   id: 'id',
   assistantId: 'assistantId',
@@ -153,17 +163,6 @@ exports.Prisma.MessageScalarFieldEnum = {
   image: 'image',
   createTime: 'createTime',
   status: 'status'
-};
-
-exports.Prisma.SettingScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  provider: 'provider',
-  apiKey: 'apiKey',
-  apiSecret: 'apiSecret',
-  textType: 'textType',
-  language: 'language',
-  theme: 'theme'
 };
 
 exports.Prisma.ProviderScalarFieldEnum = {
@@ -211,9 +210,9 @@ exports.Prisma.SortOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  Setting: 'Setting',
   Assistant: 'Assistant',
   Message: 'Message',
-  Setting: 'Setting',
   Provider: 'Provider',
   Note: 'Note',
   NoteMessage: 'NoteMessage'

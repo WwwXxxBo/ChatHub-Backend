@@ -16,6 +16,16 @@ model User {
   password String
 }
 
+model Setting {
+  id          Int    @id @default(autoincrement())
+  settingId   String @unique
+  userId      Int
+  theme       Int
+  customTheme String
+  fontSize    Int
+  locale      String
+}
+
 model Assistant {
   id             Int    @id @default(autoincrement())
   assistantId    String @unique
@@ -44,17 +54,6 @@ model Message {
   image       String
   createTime  BigInt
   status      Int
-}
-
-model Setting {
-  id        Int    @id @default(autoincrement())
-  userId    Int
-  provider  String
-  apiKey    String
-  apiSecret String
-  textType  String
-  language  String
-  theme     String
 }
 
 model Provider {

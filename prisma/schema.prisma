@@ -16,6 +16,16 @@ model User {
   password        String
 }
 
+model Setting {
+  id              Int     @id   @default(autoincrement())
+  settingId       String  @unique
+  userId          Int
+  theme           Int     
+  customTheme     String
+  fontSize        Int
+  locale          String
+}
+
 model Assistant {
   id              Int     @id @default(autoincrement())
   assistantId     String  @unique
@@ -34,36 +44,25 @@ model Assistant {
 }
 
 model Message {
-  id            Int     @id @default(autoincrement())
-  messageId     String  @unique
-  assistantId   String
-  name          String
-  role          String
-  type          String
-  content       String
-  image         String
-  createTime    BigInt
-  status        Int
-}
-
-model Setting {
-  id            Int     @id   @default(autoincrement())
-  userId        Int
-  provider      String
-  apiKey        String
-  apiSecret     String
-  textType      String
-  language      String
-  theme         String
+  id              Int     @id @default(autoincrement())
+  messageId       String  @unique
+  assistantId     String
+  name            String
+  role            String
+  type            String
+  content         String
+  image           String
+  createTime      BigInt
+  status          Int
 }
 
 model Provider {
-  id            Int     @id   @default(autoincrement())
-  providerId    String  @unique
-  userId        Int
-  provider      String
-  apiKey        String
-  apiSecret     String
+  id              Int     @id   @default(autoincrement())
+  providerId      String  @unique
+  userId          Int
+  provider        String
+  apiKey          String
+  apiSecret       String
 }
 
 model Note {
