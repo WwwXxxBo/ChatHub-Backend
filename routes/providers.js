@@ -25,7 +25,7 @@ router.get('/', async (req, res, next) => {
     const userIdNumber = Number(userId)
 
     // 获取Provider列表
-    const providers = await providerService.getProvidersListByUserId(userIdNumber)
+    const providers = await providerService.getProviderListByUserId(userIdNumber)
 
     success(res, '查询大模型API列表成功', { providers })
   } catch (error) {
@@ -42,7 +42,7 @@ router.post('/', async (req, res, next) => {
     const providerData = req.body
 
     // 验证必要字段
-    const requiredFields = ['userId', 'providerId', 'provider', 'apiKey']
+    const requiredFields = ['userId', 'providerId', 'provider']
     for (const field of requiredFields) {
       if (!providerData[field]) {
         return res.status(400).json({

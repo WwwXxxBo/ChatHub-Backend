@@ -59,7 +59,7 @@ model Setting {
 
 model Provider {
   id            Int     @id   @default(autoincrement())
-  providerId          String  @unique
+  providerId    String  @unique
   userId        Int
   provider      String
   apiKey        String
@@ -69,7 +69,7 @@ model Provider {
 model Note {
   id              Int     @id @default(autoincrement())
   noteId          String  @unique
-  assistantId   String
+  assistantId     String
   userId          Int
   type            String
   name            String
@@ -82,7 +82,7 @@ model Note {
 }
 
 model NoteMessage {
-  id            Int     @id @default(autoincrement())
+  id            Int       @id @default(autoincrement())
   messageId     String
   noteId        String
   name          String
