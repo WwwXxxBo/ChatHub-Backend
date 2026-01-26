@@ -8,6 +8,7 @@ import noteRouter from '../routes/notes.js'
 import noteMessageRouter from '../routes/noteMessages.js'
 import providerRouter from '../routes/providers.js'
 import settingRouter from '../routes/settings.js'
+import uploadRouter from '../routes/upload.js'
 
 const router = express.Router()
 
@@ -19,5 +20,6 @@ router.use('/notes', noteRouter)
 router.use('/note_messages', noteMessageRouter)
 router.use('/providers', providerRouter)
 router.use('/settings', settingRouter)
+router.use('/upload', uploadRouter)
 
 export default router

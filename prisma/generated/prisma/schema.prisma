@@ -92,3 +92,19 @@ model NoteMessage {
   createTime BigInt
   status     Int
 }
+
+model Video {
+  id           Int       @id @default(autoincrement())
+  videoId      String    @unique
+  userId       Int
+  fileName     String
+  originalName String
+  url          String
+  size         Int
+  mimeType     String
+  bucket       String
+  metadata     String
+  uploadTime   DateTime  @default(now())
+  deleteTime   DateTime?
+  status       Int
+}

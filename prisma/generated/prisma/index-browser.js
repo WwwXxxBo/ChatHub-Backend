@@ -202,9 +202,30 @@ exports.Prisma.NoteMessageScalarFieldEnum = {
   status: 'status'
 };
 
+exports.Prisma.VideoScalarFieldEnum = {
+  id: 'id',
+  videoId: 'videoId',
+  userId: 'userId',
+  fileName: 'fileName',
+  originalName: 'originalName',
+  url: 'url',
+  size: 'size',
+  mimeType: 'mimeType',
+  bucket: 'bucket',
+  metadata: 'metadata',
+  uploadTime: 'uploadTime',
+  deleteTime: 'deleteTime',
+  status: 'status'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 
 
@@ -215,7 +236,8 @@ exports.Prisma.ModelName = {
   Message: 'Message',
   Provider: 'Provider',
   Note: 'Note',
-  NoteMessage: 'NoteMessage'
+  NoteMessage: 'NoteMessage',
+  Video: 'Video'
 };
 
 /**
