@@ -8,6 +8,7 @@
     "format": "prettier --write \"**/*.{js,json,md}\" \"!prisma/generated/**\""
   },
   "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@prisma/client": "^6.8.2",
     "bcryptjs": "^3.0.2",
     "cookie-parser": "~1.4.7",

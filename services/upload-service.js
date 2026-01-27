@@ -1,5 +1,6 @@
 import minioService from './minio-service.js'
 import prisma from '../prisma/prisma.js'
+import thumbnailService from './thumbnail-service.js'
 
 class UploadService {
   /**
@@ -12,104 +13,110 @@ class UploadService {
    */
   async uploadVideo(file, userId, videoId, metadata = {}) {
     let uploadResult = null
+    let coverResult = null
 
     try {
-      // 验证videoId格式
-      if (!videoId || typeof videoId !== 'string') {
-        throw new Error('无效的videoId')
-      }
-
-      console.log('开始上传文件到MinIO...')
-
-      // 使用MinIO服务上传文件
+      // 1. 上传视频到MinIO
       uploadResult = await minioService.uploadFile(file, 'videos')
 
-      console.log('MinIO上传成功:', {
-        fileName: uploadResult.fileName,
-        url: uploadResult.url,
-        size: uploadResult.size,
-      })
+      // 2. 生成并上传封面
+      const thumbnails = await thumbnailService.generateThumbnails(file.buffer, file.originalName)
 
-      // 确保数据类型正确
-      const userIdNumber = parseInt(userId)
+      coverResult = await thumbnailService.uploadThumbnail(
+        videoId,
+        thumbnails.coverBuffer,
+        thumbnails.thumbnailBuffer,
+        file.originalname,
+      )
 
-      // 检查videoId是否已存在
-      const existingVideo = await prisma.video.findUnique({
-        where: { videoId: videoId },
-      })
-
-      if (existingVideo) {
-        throw new Error(`videoId ${videoId} 已存在`)
-      }
-
-      // 准备数据库数据
+      // 3. 保存到数据库
       const dbData = {
         videoId: videoId,
-        userId: userIdNumber,
+        userId: parseInt(userId),
         fileName: uploadResult.fileName,
         originalName: file.originalname,
-        url: uploadResult.url, // 这里应该是字符串，不是数组
+        url: uploadResult.url,
+        coverUrl: coverResult.coverUrl,
+        thumbnailUrl: coverResult.thumbnailUrl,
         size: parseInt(uploadResult.size),
         mimeType: file.mimetype,
         bucket: uploadResult.bucket,
         metadata: JSON.stringify({
           ...metadata,
-          uploadMethod: 'frontend-generated-id',
-          clientIp: metadata.ip,
-          userAgent: metadata.userAgent,
+          duration: metadata.duration || 0,
+          dimensions: metadata.dimensions || '1920x1080',
+          uploadMethod: 'auto-generated-thumbnails',
         }),
         uploadTime: new Date(),
+        tags: '',
+        difficulty: '',
         status: 1,
       }
 
-      console.log('准备保存到数据库的数据:', {
-        videoId: dbData.videoId,
-        userId: dbData.userId,
-        fileName: dbData.fileName,
-        urlType: typeof dbData.url,
-        url: dbData.url,
-        metadata: dbData.metadata,
-      })
-
-      // 保存到数据库
       const videoRecord = await prisma.video.create({
         data: dbData,
       })
 
-      console.log('视频记录创建成功:', {
-        id: videoRecord.id,
-        videoId: videoRecord.videoId,
-        userId: videoRecord.userId,
-      })
-
       return {
-        success: true,
+        status: true,
         data: {
-          ...uploadResult,
           id: videoRecord.id,
           videoId: videoRecord.videoId,
-          originalName: file.originalname,
+          fileName: file.originalname,
+          url: uploadResult.url,
+          coverUrl: coverResult.coverUrl,
+          thumbnailUrl: coverResult.thumbnailUrl,
+          size: uploadResult.size,
           mimeType: file.mimetype,
+          title: metadata.title,
+          category: metadata.category,
+          tags: metadata.tags,
+          description: metadata.description,
           uploadTime: videoRecord.uploadTime,
         },
-        message: '上传成功',
+        message: '视频上传成功，封面已自动生成',
       }
     } catch (error) {
-      console.error('Upload service error:', error.message)
-      console.error('完整错误:', error)
-
-      // 清理上传的文件（如果数据库保存失败）
-      if (uploadResult?.fileName) {
-        try {
-          console.log('清理上传的文件:', uploadResult.fileName)
-          await minioService.deleteFile(uploadResult.fileName)
-          console.log('文件清理成功')
-        } catch (cleanupError) {
-          console.error('清理上传文件失败:', cleanupError.message)
-        }
-      }
-
+      // 错误处理 - 清理所有已上传的文件
+      await this.rollbackUpload(uploadResult, coverResult)
       throw error
+    }
+  }
+
+  /**
+   * 回滚上传
+   */
+  async rollbackUpload(uploadResult, coverResult) {
+    const cleanupPromises = []
+
+    if (uploadResult?.fileName) {
+      cleanupPromises.push(minioService.deleteFile(uploadResult.fileName))
+    }
+
+    if (coverResult?.coverUrl) {
+      // 从URL中提取文件名
+      const coverFileName = this.extractFileNameFromUrl(coverResult.coverUrl)
+      if (coverFileName) {
+        cleanupPromises.push(minioService.deleteFile(coverFileName))
+      }
+    }
+
+    if (coverResult?.thumbnailUrl) {
+      const thumbFileName = this.extractFileNameFromUrl(coverResult.thumbnailUrl)
+      if (thumbFileName) {
+        cleanupPromises.push(minioService.deleteFile(thumbFileName))
+      }
+    }
+
+    await Promise.allSettled(cleanupPromises)
+  }
+
+  extractFileNameFromUrl(url) {
+    try {
+      const urlObj = new URL(url)
+      return urlObj.pathname.split('/').pop()
+    } catch {
+      return null
     }
   }
 

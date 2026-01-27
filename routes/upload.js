@@ -176,7 +176,7 @@ router.post('/videos', memoryUpload.array('videos', 10), async (req, res, next) 
  */
 router.get('/videos', async (req, res, next) => {
   try {
-    const userId = req.user?.id || req.query.userId || 1
+    const userId = Number(req.user?.id || req.query.userId || 1)
     const page = parseInt(req.query.page) || 1
     const limit = parseInt(req.query.limit) || 20
 

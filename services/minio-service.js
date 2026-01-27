@@ -180,6 +180,39 @@ class MinioService {
       throw new Error(`获取文件URL失败: ${error.message}`)
     }
   }
+
+  /**
+   * 上传缓冲区文件
+   */
+  async uploadBuffer(buffer, fileName, contentType, originalName) {
+    try {
+      await this.minioClient.putObject(this.defaultBucket, fileName, buffer, buffer.length, {
+        'Content-Type': contentType,
+        'Content-Disposition': `inline; filename="${encodeURIComponent(originalName)}"`,
+      })
+
+      const presignedUrl = await this.minioClient.presignedGetObject(
+        this.defaultBucket,
+        fileName,
+        7 * 24 * 60 * 60,
+      )
+
+      const baseUrl = presignedUrl.split('?')[0]
+      return {
+        success: true,
+        fileName: fileName,
+        originalName: originalName,
+        size: buffer.length,
+        mimeType: contentType,
+        url: String(baseUrl),
+        fullUrl: presignedUrl,
+        bucket: this.defaultBucket,
+      }
+    } catch (error) {
+      console.error('Error uploading buffer:', error)
+      throw new Error(`上传失败: ${error.message}`)
+    }
+  }
 }
 
 export default new MinioService()

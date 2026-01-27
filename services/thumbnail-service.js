@@ -1,8 +1,17 @@
 import ffmpeg from 'fluent-ffmpeg'
+import ffmpegInstaller from '@ffmpeg-installer/ffmpeg'
 import path from 'path'
 import { promises as fs } from 'fs'
 import sharp from 'sharp'
-import minioService from './minio-service'
+import minioService from './minio-service.js'
+
+// 设置ffmpeg路径
+if (process.platform === 'win32') {
+  ffmpeg.setFfmpegPath(ffmpegInstaller.path)
+} else {
+  // Linux/Mac
+  ffmpeg.setFfmpegPath('ffmpeg')
+}
 
 class ThumbnailService {
   constructor() {
@@ -52,22 +61,44 @@ class ThumbnailService {
    */
   async extractVideoFrame(videoPath, outputPath) {
     return new Promise((resolve, reject) => {
-      ffmpeg(videoPath)
-        .screenshot({
-          timestamps: ['0'],
-          filename: path.basename(outputPath),
-          folder: path.dirname(outputPath),
-          size: '1920x?',
+      console.log('开始提取视频帧，视频路径:', videoPath)
+
+      const command = ffmpeg(videoPath)
+        .inputOptions([
+          '-loglevel',
+          'error', // 只显示错误日志
+        ])
+        .outputOptions([
+          '-frames:v',
+          '1', // 只取一帧
+          '-q:v',
+          '2', // 高质量
+        ])
+        .output(outputPath)
+        .on('start', (commandLine) => {
+          console.log('FFmpeg命令:', commandLine)
         })
         .on('end', async () => {
+          console.log('视频帧提取完成:', outputPath)
           try {
             const buffer = await fs.readFile(outputPath)
             resolve(buffer)
           } catch (error) {
+            console.error('读取提取的帧失败:', error)
             reject(error)
           }
         })
-        .on('error', reject)
+        .on('error', (err, stdout, stderr) => {
+          console.error('FFmpeg错误:', err.message)
+          console.error('标准输出:', stdout)
+          console.error('标准错误:', stderr)
+          reject(err)
+        })
+        .on('stderr', (stderrLine) => {
+          console.log('FFmpeg stderr:', stderrLine)
+        })
+
+      command.run()
     })
   }
 
