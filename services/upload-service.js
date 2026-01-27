@@ -179,7 +179,6 @@ class UploadService {
       if (search && search.trim() !== '') {
         whereCondition.title = {
           contains: search.trim(),
-          mode: 'insensitive', // 不区分大小写
         }
       }
 
