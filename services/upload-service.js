@@ -27,6 +27,7 @@ class UploadService {
         thumbnails.coverBuffer,
         thumbnails.thumbnailBuffer,
         file.originalname,
+        thumbnails.duration,
       )
 
       // 3. 保存到数据库
@@ -36,26 +37,43 @@ class UploadService {
         fileName: uploadResult.fileName,
         originalName: file.originalname,
         url: uploadResult.url,
+        title: metadata.title || file.originalname, // 使用传入的title或文件名
         coverUrl: coverResult.coverUrl,
         thumbnailUrl: coverResult.thumbnailUrl,
+        duration: coverResult.duration,
         size: parseInt(uploadResult.size),
         mimeType: file.mimetype,
         bucket: uploadResult.bucket,
         metadata: JSON.stringify({
           ...metadata,
-          duration: metadata.duration || 0,
+          originalMetadata: metadata,
+          duration: thumbnails.duration, // 也保存在metadata中备份
+          durationSeconds: await this.convertDurationToSeconds(thumbnails.duration),
           dimensions: metadata.dimensions || '1920x1080',
           uploadMethod: 'auto-generated-thumbnails',
         }),
         uploadTime: new Date(),
-        tags: '',
-        difficulty: '',
+        tags:
+          typeof metadata.tags === 'string' ? metadata.tags : JSON.stringify(metadata.tags || []),
+        category: metadata.category || '',
+        description: metadata.description || '',
         status: 1,
       }
 
       const videoRecord = await prisma.video.create({
         data: dbData,
       })
+
+      // 5. 解析tags（如果是JSON字符串）
+      let tags = []
+      try {
+        if (metadata.tags) {
+          tags = typeof metadata.tags === 'string' ? JSON.parse(metadata.tags) : metadata.tags
+        }
+      } catch (e) {
+        console.warn('解析tags失败:', e.message)
+        tags = Array.isArray(metadata.tags) ? metadata.tags : []
+      }
 
       return {
         status: true,
@@ -66,12 +84,14 @@ class UploadService {
           url: uploadResult.url,
           coverUrl: coverResult.coverUrl,
           thumbnailUrl: coverResult.thumbnailUrl,
+          duration: coverResult.duration,
           size: uploadResult.size,
           mimeType: file.mimetype,
-          title: metadata.title,
-          category: metadata.category,
-          tags: metadata.tags,
-          description: metadata.description,
+          title: videoRecord.title,
+          category: videoRecord.category,
+          tags: tags, // 返回解析后的数组
+          description: videoRecord.description,
+          difficulty: videoRecord.difficulty,
           uploadTime: videoRecord.uploadTime,
         },
         message: '视频上传成功，封面已自动生成',
@@ -80,6 +100,34 @@ class UploadService {
       // 错误处理 - 清理所有已上传的文件
       await this.rollbackUpload(uploadResult, coverResult)
       throw error
+    }
+  }
+
+  /**
+   * 将时长字符串转换为秒数
+   * @param {string} duration - 时长字符串，如 "10:30"
+   * @returns {number} 秒数
+   */
+  async convertDurationToSeconds(duration) {
+    if (!duration) return 0
+
+    try {
+      const parts = duration.split(':')
+      if (parts.length === 2) {
+        const minutes = parseInt(parts[0])
+        const seconds = parseInt(parts[1])
+        return minutes * 60 + seconds
+      } else if (parts.length === 3) {
+        // 处理 "时:分:秒" 格式
+        const hours = parseInt(parts[0])
+        const minutes = parseInt(parts[1])
+        const seconds = parseInt(parts[2])
+        return hours * 3600 + minutes * 60 + seconds
+      }
+      return 0
+    } catch (error) {
+      console.error('转换时长失败:', error)
+      return 0
     }
   }
 
@@ -137,16 +185,40 @@ class UploadService {
           orderBy: { uploadTime: 'desc' },
           skip,
           take: limit,
+          select: {
+            id: true,
+            videoId: true,
+            fileName: true,
+            originalName: true,
+            title: true,
+            url: true,
+            coverUrl: true,
+            thumbnailUrl: true,
+            duration: true,
+            tags: true,
+            category: true,
+            description: true,
+            difficulty: true,
+            size: true,
+            mimeType: true,
+            uploadTime: true,
+          },
         }),
         prisma.video.count({
           where: { userId, status: 1 },
         }),
       ])
 
+      // 解析tags字段
+      const processedVideos = videos.map((video) => ({
+        ...video,
+        tags: video.tags ? JSON.parse(video.tags) : [],
+      }))
+
       return {
         success: true,
         data: {
-          videos,
+          videos: processedVideos,
           pagination: {
             page,
             limit,

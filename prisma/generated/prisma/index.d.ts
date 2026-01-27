@@ -9180,10 +9180,14 @@ export namespace Prisma {
     userId: number | null
     fileName: string | null
     originalName: string | null
+    title: string | null
     url: string | null
     coverUrl: string | null
     thumbnailUrl: string | null
+    duration: string | null
     tags: string | null
+    category: string | null
+    description: string | null
     difficulty: string | null
     size: number | null
     mimeType: string | null
@@ -9200,10 +9204,14 @@ export namespace Prisma {
     userId: number | null
     fileName: string | null
     originalName: string | null
+    title: string | null
     url: string | null
     coverUrl: string | null
     thumbnailUrl: string | null
+    duration: string | null
     tags: string | null
+    category: string | null
+    description: string | null
     difficulty: string | null
     size: number | null
     mimeType: string | null
@@ -9220,10 +9228,14 @@ export namespace Prisma {
     userId: number
     fileName: number
     originalName: number
+    title: number
     url: number
     coverUrl: number
     thumbnailUrl: number
+    duration: number
     tags: number
+    category: number
+    description: number
     difficulty: number
     size: number
     mimeType: number
@@ -9256,10 +9268,14 @@ export namespace Prisma {
     userId?: true
     fileName?: true
     originalName?: true
+    title?: true
     url?: true
     coverUrl?: true
     thumbnailUrl?: true
+    duration?: true
     tags?: true
+    category?: true
+    description?: true
     difficulty?: true
     size?: true
     mimeType?: true
@@ -9276,10 +9292,14 @@ export namespace Prisma {
     userId?: true
     fileName?: true
     originalName?: true
+    title?: true
     url?: true
     coverUrl?: true
     thumbnailUrl?: true
+    duration?: true
     tags?: true
+    category?: true
+    description?: true
     difficulty?: true
     size?: true
     mimeType?: true
@@ -9296,10 +9316,14 @@ export namespace Prisma {
     userId?: true
     fileName?: true
     originalName?: true
+    title?: true
     url?: true
     coverUrl?: true
     thumbnailUrl?: true
+    duration?: true
     tags?: true
+    category?: true
+    description?: true
     difficulty?: true
     size?: true
     mimeType?: true
@@ -9403,11 +9427,15 @@ export namespace Prisma {
     userId: number
     fileName: string
     originalName: string
+    title: string
     url: string
     coverUrl: string
     thumbnailUrl: string
-    tags: string
-    difficulty: string
+    duration: string
+    tags: string | null
+    category: string | null
+    description: string | null
+    difficulty: string | null
     size: number
     mimeType: string
     bucket: string
@@ -9442,10 +9470,14 @@ export namespace Prisma {
     userId?: boolean
     fileName?: boolean
     originalName?: boolean
+    title?: boolean
     url?: boolean
     coverUrl?: boolean
     thumbnailUrl?: boolean
+    duration?: boolean
     tags?: boolean
+    category?: boolean
+    description?: boolean
     difficulty?: boolean
     size?: boolean
     mimeType?: boolean
@@ -9462,10 +9494,14 @@ export namespace Prisma {
     userId?: boolean
     fileName?: boolean
     originalName?: boolean
+    title?: boolean
     url?: boolean
     coverUrl?: boolean
     thumbnailUrl?: boolean
+    duration?: boolean
     tags?: boolean
+    category?: boolean
+    description?: boolean
     difficulty?: boolean
     size?: boolean
     mimeType?: boolean
@@ -9482,10 +9518,14 @@ export namespace Prisma {
     userId?: boolean
     fileName?: boolean
     originalName?: boolean
+    title?: boolean
     url?: boolean
     coverUrl?: boolean
     thumbnailUrl?: boolean
+    duration?: boolean
     tags?: boolean
+    category?: boolean
+    description?: boolean
     difficulty?: boolean
     size?: boolean
     mimeType?: boolean
@@ -9502,10 +9542,14 @@ export namespace Prisma {
     userId?: boolean
     fileName?: boolean
     originalName?: boolean
+    title?: boolean
     url?: boolean
     coverUrl?: boolean
     thumbnailUrl?: boolean
+    duration?: boolean
     tags?: boolean
+    category?: boolean
+    description?: boolean
     difficulty?: boolean
     size?: boolean
     mimeType?: boolean
@@ -9516,7 +9560,7 @@ export namespace Prisma {
     status?: boolean
   }
 
-  export type VideoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "videoId" | "userId" | "fileName" | "originalName" | "url" | "coverUrl" | "thumbnailUrl" | "tags" | "difficulty" | "size" | "mimeType" | "bucket" | "metadata" | "uploadTime" | "deleteTime" | "status", ExtArgs["result"]["video"]>
+  export type VideoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "videoId" | "userId" | "fileName" | "originalName" | "title" | "url" | "coverUrl" | "thumbnailUrl" | "duration" | "tags" | "category" | "description" | "difficulty" | "size" | "mimeType" | "bucket" | "metadata" | "uploadTime" | "deleteTime" | "status", ExtArgs["result"]["video"]>
 
   export type $VideoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Video"
@@ -9527,11 +9571,15 @@ export namespace Prisma {
       userId: number
       fileName: string
       originalName: string
+      title: string
       url: string
       coverUrl: string
       thumbnailUrl: string
-      tags: string
-      difficulty: string
+      duration: string
+      tags: string | null
+      category: string | null
+      description: string | null
+      difficulty: string | null
       size: number
       mimeType: string
       bucket: string
@@ -9967,10 +10015,14 @@ export namespace Prisma {
     readonly userId: FieldRef<"Video", 'Int'>
     readonly fileName: FieldRef<"Video", 'String'>
     readonly originalName: FieldRef<"Video", 'String'>
+    readonly title: FieldRef<"Video", 'String'>
     readonly url: FieldRef<"Video", 'String'>
     readonly coverUrl: FieldRef<"Video", 'String'>
     readonly thumbnailUrl: FieldRef<"Video", 'String'>
+    readonly duration: FieldRef<"Video", 'String'>
     readonly tags: FieldRef<"Video", 'String'>
+    readonly category: FieldRef<"Video", 'String'>
+    readonly description: FieldRef<"Video", 'String'>
     readonly difficulty: FieldRef<"Video", 'String'>
     readonly size: FieldRef<"Video", 'Int'>
     readonly mimeType: FieldRef<"Video", 'String'>
@@ -10466,10 +10518,14 @@ export namespace Prisma {
     userId: 'userId',
     fileName: 'fileName',
     originalName: 'originalName',
+    title: 'title',
     url: 'url',
     coverUrl: 'coverUrl',
     thumbnailUrl: 'thumbnailUrl',
+    duration: 'duration',
     tags: 'tags',
+    category: 'category',
+    description: 'description',
     difficulty: 'difficulty',
     size: 'size',
     mimeType: 'mimeType',
@@ -11074,11 +11130,15 @@ export namespace Prisma {
     userId?: IntFilter<"Video"> | number
     fileName?: StringFilter<"Video"> | string
     originalName?: StringFilter<"Video"> | string
+    title?: StringFilter<"Video"> | string
     url?: StringFilter<"Video"> | string
     coverUrl?: StringFilter<"Video"> | string
     thumbnailUrl?: StringFilter<"Video"> | string
-    tags?: StringFilter<"Video"> | string
-    difficulty?: StringFilter<"Video"> | string
+    duration?: StringFilter<"Video"> | string
+    tags?: StringNullableFilter<"Video"> | string | null
+    category?: StringNullableFilter<"Video"> | string | null
+    description?: StringNullableFilter<"Video"> | string | null
+    difficulty?: StringNullableFilter<"Video"> | string | null
     size?: IntFilter<"Video"> | number
     mimeType?: StringFilter<"Video"> | string
     bucket?: StringFilter<"Video"> | string
@@ -11094,11 +11154,15 @@ export namespace Prisma {
     userId?: SortOrder
     fileName?: SortOrder
     originalName?: SortOrder
+    title?: SortOrder
     url?: SortOrder
     coverUrl?: SortOrder
     thumbnailUrl?: SortOrder
-    tags?: SortOrder
-    difficulty?: SortOrder
+    duration?: SortOrder
+    tags?: SortOrderInput | SortOrder
+    category?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    difficulty?: SortOrderInput | SortOrder
     size?: SortOrder
     mimeType?: SortOrder
     bucket?: SortOrder
@@ -11117,11 +11181,15 @@ export namespace Prisma {
     userId?: IntFilter<"Video"> | number
     fileName?: StringFilter<"Video"> | string
     originalName?: StringFilter<"Video"> | string
+    title?: StringFilter<"Video"> | string
     url?: StringFilter<"Video"> | string
     coverUrl?: StringFilter<"Video"> | string
     thumbnailUrl?: StringFilter<"Video"> | string
-    tags?: StringFilter<"Video"> | string
-    difficulty?: StringFilter<"Video"> | string
+    duration?: StringFilter<"Video"> | string
+    tags?: StringNullableFilter<"Video"> | string | null
+    category?: StringNullableFilter<"Video"> | string | null
+    description?: StringNullableFilter<"Video"> | string | null
+    difficulty?: StringNullableFilter<"Video"> | string | null
     size?: IntFilter<"Video"> | number
     mimeType?: StringFilter<"Video"> | string
     bucket?: StringFilter<"Video"> | string
@@ -11137,11 +11205,15 @@ export namespace Prisma {
     userId?: SortOrder
     fileName?: SortOrder
     originalName?: SortOrder
+    title?: SortOrder
     url?: SortOrder
     coverUrl?: SortOrder
     thumbnailUrl?: SortOrder
-    tags?: SortOrder
-    difficulty?: SortOrder
+    duration?: SortOrder
+    tags?: SortOrderInput | SortOrder
+    category?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    difficulty?: SortOrderInput | SortOrder
     size?: SortOrder
     mimeType?: SortOrder
     bucket?: SortOrder
@@ -11165,11 +11237,15 @@ export namespace Prisma {
     userId?: IntWithAggregatesFilter<"Video"> | number
     fileName?: StringWithAggregatesFilter<"Video"> | string
     originalName?: StringWithAggregatesFilter<"Video"> | string
+    title?: StringWithAggregatesFilter<"Video"> | string
     url?: StringWithAggregatesFilter<"Video"> | string
     coverUrl?: StringWithAggregatesFilter<"Video"> | string
     thumbnailUrl?: StringWithAggregatesFilter<"Video"> | string
-    tags?: StringWithAggregatesFilter<"Video"> | string
-    difficulty?: StringWithAggregatesFilter<"Video"> | string
+    duration?: StringWithAggregatesFilter<"Video"> | string
+    tags?: StringNullableWithAggregatesFilter<"Video"> | string | null
+    category?: StringNullableWithAggregatesFilter<"Video"> | string | null
+    description?: StringNullableWithAggregatesFilter<"Video"> | string | null
+    difficulty?: StringNullableWithAggregatesFilter<"Video"> | string | null
     size?: IntWithAggregatesFilter<"Video"> | number
     mimeType?: StringWithAggregatesFilter<"Video"> | string
     bucket?: StringWithAggregatesFilter<"Video"> | string
@@ -11758,11 +11834,15 @@ export namespace Prisma {
     userId: number
     fileName: string
     originalName: string
+    title: string
     url: string
     coverUrl: string
     thumbnailUrl: string
-    tags: string
-    difficulty: string
+    duration: string
+    tags?: string | null
+    category?: string | null
+    description?: string | null
+    difficulty?: string | null
     size: number
     mimeType: string
     bucket: string
@@ -11778,11 +11858,15 @@ export namespace Prisma {
     userId: number
     fileName: string
     originalName: string
+    title: string
     url: string
     coverUrl: string
     thumbnailUrl: string
-    tags: string
-    difficulty: string
+    duration: string
+    tags?: string | null
+    category?: string | null
+    description?: string | null
+    difficulty?: string | null
     size: number
     mimeType: string
     bucket: string
@@ -11797,11 +11881,15 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     fileName?: StringFieldUpdateOperationsInput | string
     originalName?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     coverUrl?: StringFieldUpdateOperationsInput | string
     thumbnailUrl?: StringFieldUpdateOperationsInput | string
-    tags?: StringFieldUpdateOperationsInput | string
-    difficulty?: StringFieldUpdateOperationsInput | string
+    duration?: StringFieldUpdateOperationsInput | string
+    tags?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: NullableStringFieldUpdateOperationsInput | string | null
     size?: IntFieldUpdateOperationsInput | number
     mimeType?: StringFieldUpdateOperationsInput | string
     bucket?: StringFieldUpdateOperationsInput | string
@@ -11817,11 +11905,15 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     fileName?: StringFieldUpdateOperationsInput | string
     originalName?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     coverUrl?: StringFieldUpdateOperationsInput | string
     thumbnailUrl?: StringFieldUpdateOperationsInput | string
-    tags?: StringFieldUpdateOperationsInput | string
-    difficulty?: StringFieldUpdateOperationsInput | string
+    duration?: StringFieldUpdateOperationsInput | string
+    tags?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: NullableStringFieldUpdateOperationsInput | string | null
     size?: IntFieldUpdateOperationsInput | number
     mimeType?: StringFieldUpdateOperationsInput | string
     bucket?: StringFieldUpdateOperationsInput | string
@@ -11837,11 +11929,15 @@ export namespace Prisma {
     userId: number
     fileName: string
     originalName: string
+    title: string
     url: string
     coverUrl: string
     thumbnailUrl: string
-    tags: string
-    difficulty: string
+    duration: string
+    tags?: string | null
+    category?: string | null
+    description?: string | null
+    difficulty?: string | null
     size: number
     mimeType: string
     bucket: string
@@ -11856,11 +11952,15 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     fileName?: StringFieldUpdateOperationsInput | string
     originalName?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     coverUrl?: StringFieldUpdateOperationsInput | string
     thumbnailUrl?: StringFieldUpdateOperationsInput | string
-    tags?: StringFieldUpdateOperationsInput | string
-    difficulty?: StringFieldUpdateOperationsInput | string
+    duration?: StringFieldUpdateOperationsInput | string
+    tags?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: NullableStringFieldUpdateOperationsInput | string | null
     size?: IntFieldUpdateOperationsInput | number
     mimeType?: StringFieldUpdateOperationsInput | string
     bucket?: StringFieldUpdateOperationsInput | string
@@ -11876,11 +11976,15 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     fileName?: StringFieldUpdateOperationsInput | string
     originalName?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     coverUrl?: StringFieldUpdateOperationsInput | string
     thumbnailUrl?: StringFieldUpdateOperationsInput | string
-    tags?: StringFieldUpdateOperationsInput | string
-    difficulty?: StringFieldUpdateOperationsInput | string
+    duration?: StringFieldUpdateOperationsInput | string
+    tags?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: NullableStringFieldUpdateOperationsInput | string | null
     size?: IntFieldUpdateOperationsInput | number
     mimeType?: StringFieldUpdateOperationsInput | string
     bucket?: StringFieldUpdateOperationsInput | string
@@ -12324,6 +12428,20 @@ export namespace Prisma {
     status?: SortOrder
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -12357,10 +12475,14 @@ export namespace Prisma {
     userId?: SortOrder
     fileName?: SortOrder
     originalName?: SortOrder
+    title?: SortOrder
     url?: SortOrder
     coverUrl?: SortOrder
     thumbnailUrl?: SortOrder
+    duration?: SortOrder
     tags?: SortOrder
+    category?: SortOrder
+    description?: SortOrder
     difficulty?: SortOrder
     size?: SortOrder
     mimeType?: SortOrder
@@ -12384,10 +12506,14 @@ export namespace Prisma {
     userId?: SortOrder
     fileName?: SortOrder
     originalName?: SortOrder
+    title?: SortOrder
     url?: SortOrder
     coverUrl?: SortOrder
     thumbnailUrl?: SortOrder
+    duration?: SortOrder
     tags?: SortOrder
+    category?: SortOrder
+    description?: SortOrder
     difficulty?: SortOrder
     size?: SortOrder
     mimeType?: SortOrder
@@ -12404,10 +12530,14 @@ export namespace Prisma {
     userId?: SortOrder
     fileName?: SortOrder
     originalName?: SortOrder
+    title?: SortOrder
     url?: SortOrder
     coverUrl?: SortOrder
     thumbnailUrl?: SortOrder
+    duration?: SortOrder
     tags?: SortOrder
+    category?: SortOrder
+    description?: SortOrder
     difficulty?: SortOrder
     size?: SortOrder
     mimeType?: SortOrder
@@ -12423,6 +12553,23 @@ export namespace Prisma {
     userId?: SortOrder
     size?: SortOrder
     status?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -12471,6 +12618,10 @@ export namespace Prisma {
     decrement?: bigint | number
     multiply?: bigint | number
     divide?: bigint | number
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -12577,6 +12728,20 @@ export namespace Prisma {
     _max?: NestedBigIntFilter<$PrismaModel>
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -12597,6 +12762,34 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -12625,17 +12818,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
 

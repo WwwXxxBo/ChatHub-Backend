@@ -99,11 +99,15 @@ model Video {
   userId       Int
   fileName     String
   originalName String
+  title        String
   url          String
   coverUrl     String
   thumbnailUrl String
-  tags         String
-  difficulty   String
+  duration     String
+  tags         String?
+  category     String?
+  description  String?
+  difficulty   String?
   size         Int
   mimeType     String
   bucket       String

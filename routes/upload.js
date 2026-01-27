@@ -50,11 +50,21 @@ router.post('/video', memoryUpload.single('video'), async (req, res, next) => {
       size: req.file.size,
     })
 
-    // 解析tags（如果是JSON字符串）
+    // 处理表单字段
+    const title = req.body.title || req.file.originalname
+    const category = req.body.category || ''
+    const description = req.body.description || ''
+    const difficulty = req.body.difficulty || ''
+
+    // 处理tags - 支持数组或字符串
     let tags = []
     try {
       if (req.body.tags) {
-        tags = JSON.parse(req.body.tags)
+        if (typeof req.body.tags === 'string') {
+          tags = JSON.parse(req.body.tags)
+        } else if (Array.isArray(req.body.tags)) {
+          tags = req.body.tags
+        }
       }
     } catch (e) {
       console.warn('解析tags失败:', e.message)
@@ -64,10 +74,11 @@ router.post('/video', memoryUpload.single('video'), async (req, res, next) => {
     const metadata = {
       ip: req.ip,
       userAgent: req.headers['user-agent'],
-      title: req.body.title || req.file.originalname,
-      category: req.body.category || 'other',
+      title: title,
+      category: category,
       tags: tags,
-      description: req.body.description,
+      description: description,
+      difficulty: difficulty,
       videoId: videoId,
     }
 
@@ -82,19 +93,7 @@ router.post('/video', memoryUpload.single('video'), async (req, res, next) => {
     res.json({
       success: true,
       message: result.message,
-      data: {
-        id: result.data.id,
-        videoId: result.data.videoId,
-        fileName: result.data.originalName,
-        url: result.data.url,
-        size: result.data.size,
-        mimeType: result.data.mimeType,
-        title: metadata.title,
-        category: metadata.category,
-        tags: metadata.tags,
-        description: metadata.description,
-        uploadTime: result.data.uploadTime,
-      },
+      data: result.data,
     })
   } catch (error) {
     console.error('上传路由错误:', error.message)
