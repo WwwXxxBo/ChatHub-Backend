@@ -19,14 +19,17 @@ class UploadService {
       // 1. 上传视频到MinIO
       uploadResult = await minioService.uploadFile(file, 'videos')
 
-      // 2. 生成并上传封面
-      const thumbnails = await thumbnailService.generateThumbnails(file.buffer, file.originalName)
+      // 2. 生成并上传封面 - 修复：传递正确的originalname
+      const thumbnails = await thumbnailService.generateThumbnails(
+        file.buffer,
+        file.originalname || file.originalName,
+      )
 
       coverResult = await thumbnailService.uploadThumbnail(
         videoId,
         thumbnails.coverBuffer,
         thumbnails.thumbnailBuffer,
-        file.originalname,
+        file.originalname || file.originalName,
         thumbnails.duration,
       )
 
@@ -35,26 +38,23 @@ class UploadService {
         videoId: videoId,
         userId: parseInt(userId),
         fileName: uploadResult.fileName,
-        originalName: file.originalname,
+        originalName: file.originalname || file.originalName,
         url: uploadResult.url,
-        title: metadata.title || file.originalname, // 使用传入的title或文件名
+        title: metadata.title || file.originalname || file.originalName,
         coverUrl: coverResult.coverUrl,
         thumbnailUrl: coverResult.thumbnailUrl,
-        duration: coverResult.duration,
+        duration: coverResult.duration, // 这里应该包含正确的时长
         size: parseInt(uploadResult.size),
         mimeType: file.mimetype,
         bucket: uploadResult.bucket,
         metadata: JSON.stringify({
           ...metadata,
-          originalMetadata: metadata,
-          duration: thumbnails.duration, // 也保存在metadata中备份
+          duration: thumbnails.duration,
           durationSeconds: await this.convertDurationToSeconds(thumbnails.duration),
-          dimensions: metadata.dimensions || '1920x1080',
           uploadMethod: 'auto-generated-thumbnails',
         }),
         uploadTime: new Date(),
-        tags:
-          typeof metadata.tags === 'string' ? metadata.tags : JSON.stringify(metadata.tags || []),
+        tags: metadata.tags ? JSON.stringify(metadata.tags) : '[]',
         category: metadata.category || '',
         description: metadata.description || '',
         status: 1,
@@ -64,23 +64,12 @@ class UploadService {
         data: dbData,
       })
 
-      // 5. 解析tags（如果是JSON字符串）
-      let tags = []
-      try {
-        if (metadata.tags) {
-          tags = typeof metadata.tags === 'string' ? JSON.parse(metadata.tags) : metadata.tags
-        }
-      } catch (e) {
-        console.warn('解析tags失败:', e.message)
-        tags = Array.isArray(metadata.tags) ? metadata.tags : []
-      }
-
       return {
         status: true,
         data: {
           id: videoRecord.id,
           videoId: videoRecord.videoId,
-          fileName: file.originalname,
+          fileName: file.originalname || file.originalName,
           url: uploadResult.url,
           coverUrl: coverResult.coverUrl,
           thumbnailUrl: coverResult.thumbnailUrl,
@@ -89,7 +78,7 @@ class UploadService {
           mimeType: file.mimetype,
           title: videoRecord.title,
           category: videoRecord.category,
-          tags: tags, // 返回解析后的数组
+          tags: metadata.tags || [],
           description: videoRecord.description,
           difficulty: videoRecord.difficulty,
           uploadTime: videoRecord.uploadTime,
@@ -97,7 +86,6 @@ class UploadService {
         message: '视频上传成功，封面已自动生成',
       }
     } catch (error) {
-      // 错误处理 - 清理所有已上传的文件
       await this.rollbackUpload(uploadResult, coverResult)
       throw error
     }
@@ -173,15 +161,38 @@ class UploadService {
    * @param {number} userId - 用户ID
    * @param {number} page - 页码
    * @param {number} limit - 每页数量
+   * @param {string} search - 搜索关键词（在title中模糊查找）
+   * @param {string} category - 分类筛选
    * @returns {Promise<Object>} 视频列表
    */
-  async getUserVideos(userId, page = 1, limit = 20) {
+  async getUserVideos(userId, page = 1, limit = 20, search = '', category = '') {
     try {
       const skip = (page - 1) * limit
 
+      // 构建查询条件 - 修复这里
+      const whereCondition = {
+        userId: parseInt(userId),
+        status: 1,
+      }
+
+      // 修复：正确处理搜索条件
+      if (search && search.trim() !== '') {
+        whereCondition.title = {
+          contains: search.trim(),
+          mode: 'insensitive', // 不区分大小写
+        }
+      }
+
+      // 修复：只有在category有值时才添加条件
+      if (category && category.trim() !== '') {
+        whereCondition.category = category.trim()
+      }
+
+      console.log('查询条件:', JSON.stringify(whereCondition))
+
       const [videos, total] = await Promise.all([
         prisma.video.findMany({
-          where: { userId, status: 1 },
+          where: whereCondition,
           orderBy: { uploadTime: 'desc' },
           skip,
           take: limit,
@@ -205,7 +216,7 @@ class UploadService {
           },
         }),
         prisma.video.count({
-          where: { userId, status: 1 },
+          where: whereCondition,
         }),
       ])
 
@@ -224,6 +235,8 @@ class UploadService {
             limit,
             total,
             pages: Math.ceil(total / limit),
+            search,
+            category,
           },
         },
       }

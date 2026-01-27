@@ -178,8 +178,10 @@ router.get('/videos', async (req, res, next) => {
     const userId = Number(req.user?.id || req.query.userId || 1)
     const page = parseInt(req.query.page) || 1
     const limit = parseInt(req.query.limit) || 20
+    const search = req.query.search || '' // 新增：搜索参数
+    const category = req.query.category || '' // 新增：分类参数
 
-    const result = await uploadService.getUserVideos(userId, page, limit)
+    const result = await uploadService.getUserVideos(userId, page, limit, search, category)
     success(res, '获取视频列表成功', result.data)
   } catch (error) {
     next(error)
