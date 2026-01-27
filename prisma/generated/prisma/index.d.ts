@@ -9181,6 +9181,10 @@ export namespace Prisma {
     fileName: string | null
     originalName: string | null
     url: string | null
+    coverUrl: string | null
+    thumbnailUrl: string | null
+    tags: string | null
+    difficulty: string | null
     size: number | null
     mimeType: string | null
     bucket: string | null
@@ -9197,6 +9201,10 @@ export namespace Prisma {
     fileName: string | null
     originalName: string | null
     url: string | null
+    coverUrl: string | null
+    thumbnailUrl: string | null
+    tags: string | null
+    difficulty: string | null
     size: number | null
     mimeType: string | null
     bucket: string | null
@@ -9213,6 +9221,10 @@ export namespace Prisma {
     fileName: number
     originalName: number
     url: number
+    coverUrl: number
+    thumbnailUrl: number
+    tags: number
+    difficulty: number
     size: number
     mimeType: number
     bucket: number
@@ -9245,6 +9257,10 @@ export namespace Prisma {
     fileName?: true
     originalName?: true
     url?: true
+    coverUrl?: true
+    thumbnailUrl?: true
+    tags?: true
+    difficulty?: true
     size?: true
     mimeType?: true
     bucket?: true
@@ -9261,6 +9277,10 @@ export namespace Prisma {
     fileName?: true
     originalName?: true
     url?: true
+    coverUrl?: true
+    thumbnailUrl?: true
+    tags?: true
+    difficulty?: true
     size?: true
     mimeType?: true
     bucket?: true
@@ -9277,6 +9297,10 @@ export namespace Prisma {
     fileName?: true
     originalName?: true
     url?: true
+    coverUrl?: true
+    thumbnailUrl?: true
+    tags?: true
+    difficulty?: true
     size?: true
     mimeType?: true
     bucket?: true
@@ -9380,6 +9404,10 @@ export namespace Prisma {
     fileName: string
     originalName: string
     url: string
+    coverUrl: string
+    thumbnailUrl: string
+    tags: string
+    difficulty: string
     size: number
     mimeType: string
     bucket: string
@@ -9415,6 +9443,10 @@ export namespace Prisma {
     fileName?: boolean
     originalName?: boolean
     url?: boolean
+    coverUrl?: boolean
+    thumbnailUrl?: boolean
+    tags?: boolean
+    difficulty?: boolean
     size?: boolean
     mimeType?: boolean
     bucket?: boolean
@@ -9431,6 +9463,10 @@ export namespace Prisma {
     fileName?: boolean
     originalName?: boolean
     url?: boolean
+    coverUrl?: boolean
+    thumbnailUrl?: boolean
+    tags?: boolean
+    difficulty?: boolean
     size?: boolean
     mimeType?: boolean
     bucket?: boolean
@@ -9447,6 +9483,10 @@ export namespace Prisma {
     fileName?: boolean
     originalName?: boolean
     url?: boolean
+    coverUrl?: boolean
+    thumbnailUrl?: boolean
+    tags?: boolean
+    difficulty?: boolean
     size?: boolean
     mimeType?: boolean
     bucket?: boolean
@@ -9463,6 +9503,10 @@ export namespace Prisma {
     fileName?: boolean
     originalName?: boolean
     url?: boolean
+    coverUrl?: boolean
+    thumbnailUrl?: boolean
+    tags?: boolean
+    difficulty?: boolean
     size?: boolean
     mimeType?: boolean
     bucket?: boolean
@@ -9472,7 +9516,7 @@ export namespace Prisma {
     status?: boolean
   }
 
-  export type VideoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "videoId" | "userId" | "fileName" | "originalName" | "url" | "size" | "mimeType" | "bucket" | "metadata" | "uploadTime" | "deleteTime" | "status", ExtArgs["result"]["video"]>
+  export type VideoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "videoId" | "userId" | "fileName" | "originalName" | "url" | "coverUrl" | "thumbnailUrl" | "tags" | "difficulty" | "size" | "mimeType" | "bucket" | "metadata" | "uploadTime" | "deleteTime" | "status", ExtArgs["result"]["video"]>
 
   export type $VideoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Video"
@@ -9484,6 +9528,10 @@ export namespace Prisma {
       fileName: string
       originalName: string
       url: string
+      coverUrl: string
+      thumbnailUrl: string
+      tags: string
+      difficulty: string
       size: number
       mimeType: string
       bucket: string
@@ -9920,6 +9968,10 @@ export namespace Prisma {
     readonly fileName: FieldRef<"Video", 'String'>
     readonly originalName: FieldRef<"Video", 'String'>
     readonly url: FieldRef<"Video", 'String'>
+    readonly coverUrl: FieldRef<"Video", 'String'>
+    readonly thumbnailUrl: FieldRef<"Video", 'String'>
+    readonly tags: FieldRef<"Video", 'String'>
+    readonly difficulty: FieldRef<"Video", 'String'>
     readonly size: FieldRef<"Video", 'Int'>
     readonly mimeType: FieldRef<"Video", 'String'>
     readonly bucket: FieldRef<"Video", 'String'>
@@ -10415,6 +10467,10 @@ export namespace Prisma {
     fileName: 'fileName',
     originalName: 'originalName',
     url: 'url',
+    coverUrl: 'coverUrl',
+    thumbnailUrl: 'thumbnailUrl',
+    tags: 'tags',
+    difficulty: 'difficulty',
     size: 'size',
     mimeType: 'mimeType',
     bucket: 'bucket',
@@ -11019,6 +11075,10 @@ export namespace Prisma {
     fileName?: StringFilter<"Video"> | string
     originalName?: StringFilter<"Video"> | string
     url?: StringFilter<"Video"> | string
+    coverUrl?: StringFilter<"Video"> | string
+    thumbnailUrl?: StringFilter<"Video"> | string
+    tags?: StringFilter<"Video"> | string
+    difficulty?: StringFilter<"Video"> | string
     size?: IntFilter<"Video"> | number
     mimeType?: StringFilter<"Video"> | string
     bucket?: StringFilter<"Video"> | string
@@ -11035,6 +11095,10 @@ export namespace Prisma {
     fileName?: SortOrder
     originalName?: SortOrder
     url?: SortOrder
+    coverUrl?: SortOrder
+    thumbnailUrl?: SortOrder
+    tags?: SortOrder
+    difficulty?: SortOrder
     size?: SortOrder
     mimeType?: SortOrder
     bucket?: SortOrder
@@ -11054,6 +11118,10 @@ export namespace Prisma {
     fileName?: StringFilter<"Video"> | string
     originalName?: StringFilter<"Video"> | string
     url?: StringFilter<"Video"> | string
+    coverUrl?: StringFilter<"Video"> | string
+    thumbnailUrl?: StringFilter<"Video"> | string
+    tags?: StringFilter<"Video"> | string
+    difficulty?: StringFilter<"Video"> | string
     size?: IntFilter<"Video"> | number
     mimeType?: StringFilter<"Video"> | string
     bucket?: StringFilter<"Video"> | string
@@ -11070,6 +11138,10 @@ export namespace Prisma {
     fileName?: SortOrder
     originalName?: SortOrder
     url?: SortOrder
+    coverUrl?: SortOrder
+    thumbnailUrl?: SortOrder
+    tags?: SortOrder
+    difficulty?: SortOrder
     size?: SortOrder
     mimeType?: SortOrder
     bucket?: SortOrder
@@ -11094,6 +11166,10 @@ export namespace Prisma {
     fileName?: StringWithAggregatesFilter<"Video"> | string
     originalName?: StringWithAggregatesFilter<"Video"> | string
     url?: StringWithAggregatesFilter<"Video"> | string
+    coverUrl?: StringWithAggregatesFilter<"Video"> | string
+    thumbnailUrl?: StringWithAggregatesFilter<"Video"> | string
+    tags?: StringWithAggregatesFilter<"Video"> | string
+    difficulty?: StringWithAggregatesFilter<"Video"> | string
     size?: IntWithAggregatesFilter<"Video"> | number
     mimeType?: StringWithAggregatesFilter<"Video"> | string
     bucket?: StringWithAggregatesFilter<"Video"> | string
@@ -11683,6 +11759,10 @@ export namespace Prisma {
     fileName: string
     originalName: string
     url: string
+    coverUrl: string
+    thumbnailUrl: string
+    tags: string
+    difficulty: string
     size: number
     mimeType: string
     bucket: string
@@ -11699,6 +11779,10 @@ export namespace Prisma {
     fileName: string
     originalName: string
     url: string
+    coverUrl: string
+    thumbnailUrl: string
+    tags: string
+    difficulty: string
     size: number
     mimeType: string
     bucket: string
@@ -11714,6 +11798,10 @@ export namespace Prisma {
     fileName?: StringFieldUpdateOperationsInput | string
     originalName?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    coverUrl?: StringFieldUpdateOperationsInput | string
+    thumbnailUrl?: StringFieldUpdateOperationsInput | string
+    tags?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
     size?: IntFieldUpdateOperationsInput | number
     mimeType?: StringFieldUpdateOperationsInput | string
     bucket?: StringFieldUpdateOperationsInput | string
@@ -11730,6 +11818,10 @@ export namespace Prisma {
     fileName?: StringFieldUpdateOperationsInput | string
     originalName?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    coverUrl?: StringFieldUpdateOperationsInput | string
+    thumbnailUrl?: StringFieldUpdateOperationsInput | string
+    tags?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
     size?: IntFieldUpdateOperationsInput | number
     mimeType?: StringFieldUpdateOperationsInput | string
     bucket?: StringFieldUpdateOperationsInput | string
@@ -11746,6 +11838,10 @@ export namespace Prisma {
     fileName: string
     originalName: string
     url: string
+    coverUrl: string
+    thumbnailUrl: string
+    tags: string
+    difficulty: string
     size: number
     mimeType: string
     bucket: string
@@ -11761,6 +11857,10 @@ export namespace Prisma {
     fileName?: StringFieldUpdateOperationsInput | string
     originalName?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    coverUrl?: StringFieldUpdateOperationsInput | string
+    thumbnailUrl?: StringFieldUpdateOperationsInput | string
+    tags?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
     size?: IntFieldUpdateOperationsInput | number
     mimeType?: StringFieldUpdateOperationsInput | string
     bucket?: StringFieldUpdateOperationsInput | string
@@ -11777,6 +11877,10 @@ export namespace Prisma {
     fileName?: StringFieldUpdateOperationsInput | string
     originalName?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    coverUrl?: StringFieldUpdateOperationsInput | string
+    thumbnailUrl?: StringFieldUpdateOperationsInput | string
+    tags?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
     size?: IntFieldUpdateOperationsInput | number
     mimeType?: StringFieldUpdateOperationsInput | string
     bucket?: StringFieldUpdateOperationsInput | string
@@ -12254,6 +12358,10 @@ export namespace Prisma {
     fileName?: SortOrder
     originalName?: SortOrder
     url?: SortOrder
+    coverUrl?: SortOrder
+    thumbnailUrl?: SortOrder
+    tags?: SortOrder
+    difficulty?: SortOrder
     size?: SortOrder
     mimeType?: SortOrder
     bucket?: SortOrder
@@ -12277,6 +12385,10 @@ export namespace Prisma {
     fileName?: SortOrder
     originalName?: SortOrder
     url?: SortOrder
+    coverUrl?: SortOrder
+    thumbnailUrl?: SortOrder
+    tags?: SortOrder
+    difficulty?: SortOrder
     size?: SortOrder
     mimeType?: SortOrder
     bucket?: SortOrder
@@ -12293,6 +12405,10 @@ export namespace Prisma {
     fileName?: SortOrder
     originalName?: SortOrder
     url?: SortOrder
+    coverUrl?: SortOrder
+    thumbnailUrl?: SortOrder
+    tags?: SortOrder
+    difficulty?: SortOrder
     size?: SortOrder
     mimeType?: SortOrder
     bucket?: SortOrder

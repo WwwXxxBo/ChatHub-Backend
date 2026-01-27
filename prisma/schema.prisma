@@ -9,102 +9,106 @@ datasource db {
 }
 
 model User {
-  id              Int     @id   @default(autoincrement())
-  phone           String  @unique
-  email           String  @unique
-  name            String  @unique
-  password        String
+  id                Int             @id @default(autoincrement())
+  phone             String          @unique
+  email             String          @unique
+  name              String          @unique
+  password          String
 }
 
 model Setting {
-  id              Int     @id   @default(autoincrement())
-  settingId       String  @unique
-  userId          Int
-  theme           Int     
-  customTheme     String
-  fontSize        Int
-  locale          String
+  id                Int             @id @default(autoincrement())
+  settingId         String          @unique
+  userId            Int
+  theme             Int
+  customTheme       String
+  fontSize          Int
+  locale            String
 }
 
 model Assistant {
-  id              Int     @id @default(autoincrement())
-  assistantId     String  @unique
-  userId          Int
-  type            String
-  name            String
-  provider        String
-  model           String
-  createTime      BigInt
-  lastUpdateTime  BigInt
-  instruction     String
-  inputMaxTokens  Int
-  maxTokens       Int
-  contextSize     Int
-  status          Int
+  id                Int             @id @default(autoincrement())
+  assistantId       String          @unique
+  userId            Int
+  type              String
+  name              String
+  provider          String
+  model             String
+  createTime        BigInt
+  lastUpdateTime    BigInt
+  instruction       String
+  inputMaxTokens    Int
+  maxTokens         Int
+  contextSize       Int
+  status            Int
 }
 
 model Message {
-  id              Int     @id @default(autoincrement())
-  messageId       String  @unique
-  assistantId     String
-  name            String
-  role            String
-  type            String
-  content         String
-  image           String
-  createTime      BigInt
-  status          Int
+  id                Int             @id @default(autoincrement())
+  messageId         String          @unique
+  assistantId       String
+  name              String
+  role              String
+  type              String
+  content           String
+  image             String
+  createTime        BigInt
+  status            Int
 }
 
 model Provider {
-  id              Int     @id   @default(autoincrement())
-  providerId      String  @unique
-  userId          Int
-  provider        String
-  apiKey          String
-  apiSecret       String
+  id                Int             @id @default(autoincrement())
+  providerId        String          @unique
+  userId            Int
+  provider          String
+  apiKey            String
+  apiSecret         String
 }
 
 model Note {
-  id              Int     @id @default(autoincrement())
-  noteId          String  @unique
-  assistantId     String
-  userId          Int
-  type            String
-  name            String
-  title           String
-  content         String
-  comment         String
-  createTime      BigInt
-  lastUpdateTime  BigInt
-  status          Int
+  id                Int             @id @default(autoincrement())
+  noteId            String          @unique
+  assistantId       String
+  userId            Int
+  type              String
+  name              String
+  title             String
+  content           String
+  comment           String
+  createTime        BigInt
+  lastUpdateTime    BigInt
+  status            Int
 }
 
 model NoteMessage {
-  id            Int       @id @default(autoincrement())
-  messageId     String
-  noteId        String
-  name          String
-  role          String
-  type          String
-  content       String
-  image         String
-  createTime    BigInt
-  status        Int
+  id                Int             @id @default(autoincrement())
+  messageId         String
+  noteId            String
+  name              String
+  role              String
+  type              String
+  content           String
+  image             String
+  createTime        BigInt
+  status            Int
 }
 
 model Video {
-  id            Int       @id @default(autoincrement())
-  videoId       String    @unique
-  userId        Int
-  fileName      String
-  originalName  String
-  url           String
-  size          Int
-  mimeType      String
-  bucket        String
-  metadata      String
-  uploadTime    DateTime @default(now())
-  deleteTime    DateTime?
-  status        Int
+  id                Int             @id @default(autoincrement())
+  videoId           String          @unique
+  userId            Int
+  fileName          String
+  originalName      String
+  url               String
+  coverUrl          String
+  thumbnailUrl      String
+  tags              String
+  difficulty        String
+  size              Int
+  mimeType          String
+  bucket            String
+  metadata          String
+  uploadTime        DateTime        @default(now())
+  deleteTime        DateTime?
+  status            Int
 }
